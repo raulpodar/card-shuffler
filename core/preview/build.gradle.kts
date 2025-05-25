@@ -1,12 +1,12 @@
 plugins {
-  id("skydoves.pokedex.android.library")
-  id("skydoves.pokedex.android.library.compose")
-  id("skydoves.pokedex.android.hilt")
-  id("skydoves.pokedex.spotless")
+  id("raulp.cardshuffler.android.library")
+  id("raulp.cardshuffler.android.library.compose")
+  id("raulp.cardshuffler.android.hilt")
+  id("raulp.cardshuffler.spotless")
 }
 
 android {
-  namespace = "com.skydoves.pokedex.compose.feature.preview"
+  namespace = "com.raulp.cardshuffler.compose.feature.preview"
 }
 
 dependencies {

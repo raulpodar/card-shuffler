@@ -1,8 +1,8 @@
 plugins {
-  id("skydoves.pokedex.android.feature")
-  id("skydoves.pokedex.android.hilt")
+  id("raulp.cardshuffler.android.feature")
+  id("raulp.cardshuffler.android.hilt")
 }
 
 android {
-  namespace = "com.skydoves.pokedex.compose.feature.details"
+  namespace = "com.raulp.cardshuffler.compose.feature.details"
 }

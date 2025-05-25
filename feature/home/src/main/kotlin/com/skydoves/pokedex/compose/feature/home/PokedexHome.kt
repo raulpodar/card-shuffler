@@ -1,20 +1,6 @@
-/*
- * Designed and developed by 2024 skydoves (Jaewoong Eum)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
-package com.skydoves.pokedex.compose.feature.home
+
+package com.raulp.cardshuffler.compose.feature.home
 
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
@@ -59,18 +45,18 @@ import com.skydoves.landscapist.components.rememberImageComponent
 import com.skydoves.landscapist.glide.GlideImage
 import com.skydoves.landscapist.palette.PalettePlugin
 import com.skydoves.landscapist.palette.rememberPaletteState
-import com.skydoves.pokedex.compose.core.data.repository.home.FakeHomeRepository
-import com.skydoves.pokedex.compose.core.designsystem.component.PokedexAppBar
-import com.skydoves.pokedex.compose.core.designsystem.component.PokedexCircularProgress
-import com.skydoves.pokedex.compose.core.designsystem.component.pokedexSharedElement
-import com.skydoves.pokedex.compose.core.designsystem.theme.PokedexTheme
-import com.skydoves.pokedex.compose.core.model.Pokemon
-import com.skydoves.pokedex.compose.core.navigation.PokedexScreen
-import com.skydoves.pokedex.compose.core.navigation.boundsTransform
-import com.skydoves.pokedex.compose.core.navigation.currentComposeNavigator
-import com.skydoves.pokedex.compose.core.preview.PokedexPreviewTheme
-import com.skydoves.pokedex.compose.core.preview.PreviewUtils
-import com.skydoves.pokedex.compose.designsystem.R
+import com.raulp.cardshuffler.compose.core.data.repository.home.FakeHomeRepository
+import com.raulp.cardshuffler.compose.core.designsystem.component.PokedexAppBar
+import com.raulp.cardshuffler.compose.core.designsystem.component.PokedexCircularProgress
+import com.raulp.cardshuffler.compose.core.designsystem.component.pokedexSharedElement
+import com.raulp.cardshuffler.compose.core.designsystem.theme.PokedexTheme
+import com.raulp.cardshuffler.compose.core.model.Pokemon
+import com.raulp.cardshuffler.compose.core.navigation.PokedexScreen
+import com.raulp.cardshuffler.compose.core.navigation.boundsTransform
+import com.raulp.cardshuffler.compose.core.navigation.currentComposeNavigator
+import com.raulp.cardshuffler.compose.core.preview.PokedexPreviewTheme
+import com.raulp.cardshuffler.compose.core.preview.PreviewUtils
+import com.raulp.cardshuffler.compose.designsystem.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 

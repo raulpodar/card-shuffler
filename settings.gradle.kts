@@ -85,7 +85,7 @@ dependencyResolutionManagement {
     }
   }
 }
-rootProject.name = "pokedex-compose"
+rootProject.name = "cardshuffler-compose"
 include(":app")
 include(":core:model")
 include(":core:network")

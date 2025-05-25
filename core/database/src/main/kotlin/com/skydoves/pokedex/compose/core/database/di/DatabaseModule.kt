@@ -1,28 +1,14 @@
-/*
- * Designed and developed by 2024 skydoves (Jaewoong Eum)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
-package com.skydoves.pokedex.compose.core.database.di
+
+package com.raulp.cardshuffler.compose.core.database.di
 
 import android.app.Application
 import androidx.room.Room
-import com.skydoves.pokedex.compose.core.database.PokedexDatabase
-import com.skydoves.pokedex.compose.core.database.PokemonDao
-import com.skydoves.pokedex.compose.core.database.PokemonInfoDao
-import com.skydoves.pokedex.compose.core.database.StatsResponseConverter
-import com.skydoves.pokedex.compose.core.database.TypeResponseConverter
+import com.raulp.cardshuffler.compose.core.database.PokedexDatabase
+import com.raulp.cardshuffler.compose.core.database.PokemonDao
+import com.raulp.cardshuffler.compose.core.database.PokemonInfoDao
+import com.raulp.cardshuffler.compose.core.database.StatsResponseConverter
+import com.raulp.cardshuffler.compose.core.database.TypeResponseConverter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

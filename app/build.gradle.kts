@@ -1,24 +1,24 @@
-import com.skydoves.pokedex.compose.Configuration
+import com.raulp.cardshuffler.compose.Configuration
 import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
-  id("skydoves.pokedex.android.application")
-  id("skydoves.pokedex.android.application.compose")
-  id("skydoves.pokedex.android.hilt")
-  id("skydoves.pokedex.spotless")
+  id("raulp.cardshuffler.android.application")
+  id("raulp.cardshuffler.android.application.compose")
+  id("raulp.cardshuffler.android.hilt")
+  id("raulp.cardshuffler.spotless")
   alias(libs.plugins.kotlin.parcelize)
   alias(libs.plugins.baselineprofile)
 }
 
 android {
-  namespace = "com.skydoves.pokedex.compose"
+  namespace = "com.raulp.cardshuffler.compose"
 
   defaultConfig {
-    applicationId = "com.skydoves.pokedex.compose"
+    applicationId = "com.raulp.cardshuffler.compose"
     versionCode = Configuration.versionCode
     versionName = Configuration.versionName
-    testInstrumentationRunner = "com.skydoves.pokedex.compose.AppTestRunner"
+    testInstrumentationRunner = "com.raulp.cardshuffler.compose.AppTestRunner"
   }
 
   signingConfigs {

@@ -1,4 +1,4 @@
-package com.skydoves.pokedex.compose
+package com.raulp.cardshuffler.compose
 
 object Configuration {
   const val majorVersion = 1

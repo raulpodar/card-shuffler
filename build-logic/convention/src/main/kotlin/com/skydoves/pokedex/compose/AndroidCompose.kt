@@ -1,4 +1,4 @@
-package com.skydoves.pokedex.compose
+package com.raulp.cardshuffler.compose
 
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
