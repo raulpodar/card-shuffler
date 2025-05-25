@@ -46,7 +46,7 @@ import com.skydoves.landscapist.glide.GlideImage
 import com.skydoves.landscapist.palette.PalettePlugin
 import com.skydoves.landscapist.palette.rememberPaletteState
 import com.raulp.cardshuffler.compose.core.data.repository.home.FakeHomeRepository
-import com.raulp.cardshuffler.compose.core.designsystem.component.PokedexAppBar
+import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerAppBar
 import com.raulp.cardshuffler.compose.core.designsystem.component.PokedexCircularProgress
 import com.raulp.cardshuffler.compose.core.designsystem.component.pokedexSharedElement
 import com.raulp.cardshuffler.compose.core.designsystem.theme.PokedexTheme
@@ -69,7 +69,7 @@ fun SharedTransitionScope.PokedexHome(
   val pokemonList by homeViewModel.pokemonList.collectAsStateWithLifecycle()
 
   Column(modifier = Modifier.fillMaxSize()) {
-    PokedexAppBar()
+    CardShufflerAppBar()
 
     HomeContent(
       animatedVisibilityScope = animatedVisibilityScope,

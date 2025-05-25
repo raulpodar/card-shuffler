@@ -20,7 +20,7 @@ xmlns:tools="http://schemas.android.com/tools">
 <uses-permission android:name="android.permission.INTERNET" />
 
 <application
-  android:name=".PokedexApp"
+  android:name=".CardShufflerApp"
   android:allowBackup="false"
   android:enableOnBackInvokedCallback="true"
   android:icon="@mipmap/ic_launcher"

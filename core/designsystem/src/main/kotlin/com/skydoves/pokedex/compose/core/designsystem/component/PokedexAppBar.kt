@@ -14,7 +14,7 @@ import com.raulp.cardshuffler.compose.core.designsystem.theme.PokedexTheme
 import com.raulp.cardshuffler.compose.designsystem.R
 
 @Composable
-fun PokedexAppBar() {
+fun CardShufflerAppBar() {
   TopAppBar(
     title = {
       Text(
@@ -32,8 +32,8 @@ fun PokedexAppBar() {
 
 @Preview
 @Composable
-private fun PokedexAppBarPreview() {
+private fun CardShufflerAppBarPreview() {
   PokedexTheme {
-    PokedexAppBar()
+    CardShufflerAppBar()
   }
 }

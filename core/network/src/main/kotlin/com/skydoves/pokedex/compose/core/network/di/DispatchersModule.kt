@@ -3,7 +3,7 @@
 package com.raulp.cardshuffler.compose.core.network.di
 
 import com.raulp.cardshuffler.compose.core.network.Dispatcher
-import com.raulp.cardshuffler.compose.core.network.PokedexAppDispatchers
+import com.raulp.cardshuffler.compose.core.network.CardShufflerAppDispatchers
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +16,6 @@ import kotlinx.coroutines.Dispatchers
 internal object DispatchersModule {
 
   @Provides
-  @Dispatcher(PokedexAppDispatchers.IO)
+  @Dispatcher(CardShufflerAppDispatchers.IO)
   fun providesIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 }
