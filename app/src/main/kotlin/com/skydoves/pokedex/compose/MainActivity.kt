@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose
 
 import android.os.Bundle
@@ -9,8 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.CompositionLocalProvider
 import com.raulp.cardshuffler.compose.core.navigation.AppComposeNavigator
 import com.raulp.cardshuffler.compose.core.navigation.LocalComposeNavigator
-import com.raulp.cardshuffler.compose.core.navigation.PokedexScreen
-import com.raulp.cardshuffler.compose.ui.PokedexMain
+import com.raulp.cardshuffler.compose.core.navigation.CardShufflerScreen
+import com.raulp.cardshuffler.compose.ui.CardShufflerMain
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -18,7 +16,7 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
 
   @Inject
-  internal lateinit var composeNavigator: AppComposeNavigator<PokedexScreen>
+  internal lateinit var composeNavigator: AppComposeNavigator<CardShufflerScreen>
 
   override fun onCreate(savedInstanceState: Bundle?) {
     enableEdgeToEdge()
@@ -28,7 +26,7 @@ class MainActivity : ComponentActivity() {
       CompositionLocalProvider(
         LocalComposeNavigator provides composeNavigator,
       ) {
-        PokedexMain(composeNavigator = composeNavigator)
+        CardShufflerMain(composeNavigator = composeNavigator)
       }
     }
   }

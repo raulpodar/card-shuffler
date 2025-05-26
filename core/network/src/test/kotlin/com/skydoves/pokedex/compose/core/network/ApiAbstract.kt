@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.network
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule

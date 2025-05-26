@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.feature.details
 
 import androidx.compose.runtime.Stable

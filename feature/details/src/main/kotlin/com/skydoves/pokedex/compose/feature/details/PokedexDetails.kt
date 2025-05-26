@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.feature.details
 
 import android.content.res.Configuration
@@ -54,21 +52,21 @@ import com.skydoves.landscapist.glide.GlideImage
 import com.skydoves.landscapist.palette.PalettePlugin
 import com.skydoves.landscapist.palette.rememberPaletteState
 import com.raulp.cardshuffler.compose.core.data.repository.details.FakeDetailsRepository
-import com.raulp.cardshuffler.compose.core.designsystem.component.PokedexCircularProgress
-import com.raulp.cardshuffler.compose.core.designsystem.component.PokedexText
-import com.raulp.cardshuffler.compose.core.designsystem.component.pokedexSharedElement
-import com.raulp.cardshuffler.compose.core.designsystem.theme.PokedexTheme
+import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerCircularProgress
+import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerText
+import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerSharedElement
+import com.raulp.cardshuffler.compose.core.designsystem.theme.CardShufflerTheme
 import com.raulp.cardshuffler.compose.core.designsystem.utils.getPokemonTypeColor
 import com.raulp.cardshuffler.compose.core.model.Pokemon
 import com.raulp.cardshuffler.compose.core.model.PokemonInfo
 import com.raulp.cardshuffler.compose.core.navigation.boundsTransform
 import com.raulp.cardshuffler.compose.core.navigation.currentComposeNavigator
-import com.raulp.cardshuffler.compose.core.preview.PokedexPreviewTheme
+import com.raulp.cardshuffler.compose.core.preview.CardShufflerPreviewTheme
 import com.raulp.cardshuffler.compose.core.preview.PreviewUtils
 import com.raulp.cardshuffler.compose.designsystem.R
 
 @Composable
-fun SharedTransitionScope.PokedexDetails(
+fun SharedTransitionScope.CardShufflerDetails(
   animatedVisibilityScope: AnimatedVisibilityScope,
   detailsViewModel: DetailsViewModel = hiltViewModel(),
 ) {
@@ -80,7 +78,7 @@ fun SharedTransitionScope.PokedexDetails(
     modifier = Modifier
       .fillMaxSize()
       .verticalScroll(rememberScrollState())
-      .testTag("PokedexDetails"),
+      .testTag("CardShufflerDetails"),
   ) {
 
     var palette by rememberPaletteState()
@@ -100,7 +98,7 @@ fun SharedTransitionScope.PokedexDetails(
       DetailsStatus(pokemonInfo = pokemonInfo!!)
     } else {
       Box(modifier = Modifier.fillMaxSize()) {
-        PokedexCircularProgress()
+        CardShufflerCircularProgress()
       }
     }
   }
@@ -140,27 +138,27 @@ private fun SharedTransitionScope.DetailsHeader(
           .padding(end = 6.dp)
           .clickable { composeNavigator.navigateUp() },
         painter = painterResource(id = R.drawable.ic_arrow),
-        tint = PokedexTheme.colors.absoluteWhite,
+        tint = CardShufflerTheme.colors.absoluteWhite,
         contentDescription = null,
       )
 
       Text(
         modifier = Modifier.padding(horizontal = 10.dp),
         text = pokemon?.name.orEmpty(),
-        color = PokedexTheme.colors.absoluteWhite,
+        color = CardShufflerTheme.colors.absoluteWhite,
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
       )
     }
 
-    PokedexText(
+    CardShufflerText(
       modifier = Modifier
         .align(Alignment.TopEnd)
         .padding(12.dp)
         .statusBarsPadding(),
       text = pokemonInfo?.getIdString().orEmpty(),
       previewText = "#001",
-      color = PokedexTheme.colors.absoluteWhite,
+      color = CardShufflerTheme.colors.absoluteWhite,
       fontWeight = FontWeight.Bold,
       fontSize = 18.sp,
     )
@@ -170,7 +168,7 @@ private fun SharedTransitionScope.DetailsHeader(
         .align(Alignment.BottomCenter)
         .padding(bottom = 20.dp)
         .size(190.dp)
-        .pokedexSharedElement(
+        .CardShufflerSharedElement(
           isLocalInspectionMode = LocalInspectionMode.current,
           state = rememberSharedContentState(key = "image-${pokemon?.name}"),
           animatedVisibilityScope = animatedVisibilityScope,
@@ -193,11 +191,11 @@ private fun SharedTransitionScope.DetailsHeader(
     )
   }
 
-  PokedexText(
+  CardShufflerText(
     modifier = Modifier
       .padding(top = 24.dp)
       .fillMaxWidth()
-      .pokedexSharedElement(
+      .CardShufflerSharedElement(
         isLocalInspectionMode = LocalInspectionMode.current,
         state = rememberSharedContentState(key = "name-${pokemon?.name}"),
         animatedVisibilityScope = animatedVisibilityScope,
@@ -205,7 +203,7 @@ private fun SharedTransitionScope.DetailsHeader(
       ),
     text = pokemon?.name.orEmpty(),
     previewText = "skydoves",
-    color = PokedexTheme.colors.black,
+    color = CardShufflerTheme.colors.black,
     fontWeight = FontWeight.Bold,
     textAlign = TextAlign.Center,
     fontSize = 36.sp,
@@ -231,7 +229,7 @@ private fun DetailsInfo(pokemonInfo: PokemonInfo) {
         text = typeInfo.type.name,
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center,
-        color = PokedexTheme.colors.absoluteWhite,
+        color = CardShufflerTheme.colors.absoluteWhite,
         maxLines = 1,
         fontSize = 16.sp,
       )
@@ -266,16 +264,16 @@ private fun DetailsStatus(
       .padding(top = 22.dp, bottom = 16.dp),
     text = stringResource(id = R.string.base_stats),
     textAlign = TextAlign.Center,
-    color = PokedexTheme.colors.black,
+    color = CardShufflerTheme.colors.black,
     fontWeight = FontWeight.Bold,
     fontSize = 21.sp,
   )
 
   Column {
-    pokemonInfo.toPokedexStatusList().forEach { pokemonStatus ->
+    pokemonInfo.toCardShufflerStatusList().forEach { pokemonStatus ->
       PokemonStatusItem(
         modifier = Modifier.padding(bottom = 12.dp),
-        pokedexStatus = pokemonStatus,
+        CardShufflerStatus = pokemonStatus,
       )
     }
   }
@@ -284,9 +282,9 @@ private fun DetailsStatus(
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun PokedexDetailsPreview() {
-  PokedexPreviewTheme {
-    PokedexDetails(
+private fun CardShufflerDetailsPreview() {
+  CardShufflerPreviewTheme {
+    CardShufflerDetails(
       animatedVisibilityScope = it,
       detailsViewModel = DetailsViewModel(
         detailsRepository = FakeDetailsRepository(),
@@ -299,8 +297,8 @@ private fun PokedexDetailsPreview() {
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun PokedexDetailsInfoPreview() {
-  PokedexPreviewTheme {
+private fun CardShufflerDetailsInfoPreview() {
+  CardShufflerPreviewTheme {
     DetailsInfo(pokemonInfo = PreviewUtils.mockPokemonInfo())
   }
 }
@@ -308,8 +306,8 @@ private fun PokedexDetailsInfoPreview() {
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun PokedexDetailsStatusPreview() {
-  PokedexPreviewTheme {
+private fun CardShufflerDetailsStatusPreview() {
+  CardShufflerPreviewTheme {
     DetailsStatus(
       pokemonInfo = PreviewUtils.mockPokemonInfo(),
     )

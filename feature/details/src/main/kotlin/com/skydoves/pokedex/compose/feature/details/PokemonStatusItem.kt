@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.feature.details
 
 import androidx.compose.foundation.layout.Arrangement
@@ -13,13 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.raulp.cardshuffler.compose.core.designsystem.component.PokedexProgressBar
-import com.raulp.cardshuffler.compose.core.designsystem.theme.PokedexTheme
+import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerProgressBar
+import com.raulp.cardshuffler.compose.core.designsystem.theme.CardShufflerTheme
 
 @Composable
 internal fun PokemonStatusItem(
   modifier: Modifier = Modifier,
-  pokedexStatus: PokedexStatus,
+  CardShufflerStatus: CardShufflerStatus,
 ) {
   Row(
     modifier = modifier,
@@ -29,19 +27,19 @@ internal fun PokemonStatusItem(
       modifier = Modifier
         .padding(start = 32.dp)
         .widthIn(min = 20.dp),
-      text = pokedexStatus.type,
-      color = PokedexTheme.colors.white70,
+      text = CardShufflerStatus.type,
+      color = CardShufflerTheme.colors.white70,
       fontWeight = FontWeight.Bold,
       fontSize = 12.sp,
     )
 
-    PokedexProgressBar(
+    CardShufflerProgressBar(
       modifier = Modifier
         .fillMaxWidth()
         .padding(horizontal = 16.dp),
-      progress = pokedexStatus.progress,
-      color = pokedexStatus.color,
-      label = pokedexStatus.label,
+      progress = CardShufflerStatus.progress,
+      color = CardShufflerStatus.color,
+      label = CardShufflerStatus.label,
     )
   }
 }

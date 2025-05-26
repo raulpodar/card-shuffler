@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.model
 
 import androidx.compose.runtime.Immutable

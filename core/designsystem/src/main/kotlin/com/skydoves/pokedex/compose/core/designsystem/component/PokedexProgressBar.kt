@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.designsystem.component
 
 import android.content.res.Configuration
@@ -32,11 +30,11 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.raulp.cardshuffler.compose.core.designsystem.theme.PokedexTheme
+import com.raulp.cardshuffler.compose.core.designsystem.theme.CardShufflerTheme
 import com.raulp.cardshuffler.compose.core.designsystem.utils.pxToDp
 
 @Composable
-fun PokedexProgressBar(
+fun CardShufflerProgressBar(
   modifier: Modifier = Modifier,
   @FloatRange(0.0, 1.0) progress: Float,
   color: Color,
@@ -60,7 +58,7 @@ fun PokedexProgressBar(
       .height(18.dp)
       .onSizeChanged { progressWidth = it.width * progress }
       .background(
-        color = PokedexTheme.colors.absoluteWhite,
+        color = CardShufflerTheme.colors.absoluteWhite,
         shape = RoundedCornerShape(64.dp),
       )
       .clip(RoundedCornerShape(64.dp)),
@@ -101,7 +99,7 @@ fun PokedexProgressBar(
             .padding(end = (threshold * 2).pxToDp()),
           text = label,
           fontSize = 12.sp,
-          color = PokedexTheme.colors.absoluteWhite,
+          color = CardShufflerTheme.colors.absoluteWhite,
         )
       }
     }
@@ -118,7 +116,7 @@ fun PokedexProgressBar(
           ),
         text = label,
         fontSize = 12.sp,
-        color = PokedexTheme.colors.absoluteBlack,
+        color = CardShufflerTheme.colors.absoluteBlack,
       )
     }
   }
@@ -127,18 +125,18 @@ fun PokedexProgressBar(
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun PokedexProgressBarPreview1() {
-  PokedexTheme {
+private fun CardShufflerProgressBarPreview1() {
+  CardShufflerTheme {
     Box(
       modifier = Modifier
         .fillMaxWidth()
         .height(120.dp)
-        .background(PokedexTheme.colors.background),
+        .background(CardShufflerTheme.colors.background),
     ) {
-      PokedexProgressBar(
+      CardShufflerProgressBar(
         modifier = Modifier.align(Alignment.Center),
         progress = 0.1f,
-        color = PokedexTheme.colors.primary,
+        color = CardShufflerTheme.colors.primary,
         label = "150/300",
       )
     }
@@ -148,20 +146,20 @@ private fun PokedexProgressBarPreview1() {
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun PokedexProgressBarPreview2() {
-  PokedexTheme {
+private fun CardShufflerProgressBarPreview2() {
+  CardShufflerTheme {
     Box(
       modifier = Modifier
         .fillMaxWidth()
         .height(120.dp)
-        .background(PokedexTheme.colors.background),
+        .background(CardShufflerTheme.colors.background),
     ) {
-      PokedexProgressBar(
+      CardShufflerProgressBar(
         modifier = Modifier
           .fillMaxWidth()
           .align(Alignment.Center),
         progress = 0.5f,
-        color = PokedexTheme.colors.primary,
+        color = CardShufflerTheme.colors.primary,
         label = "150/300",
       )
     }

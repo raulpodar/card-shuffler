@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.designsystem.theme
 
 import androidx.compose.runtime.Composable
@@ -13,20 +11,20 @@ import androidx.compose.ui.unit.dp
 import com.raulp.cardshuffler.compose.designsystem.R
 
 @Immutable
-public data class PokedexBackground(
+public data class CardShufflerBackground(
   val color: Color = Color.Unspecified,
   val tonalElevation: Dp = Dp.Unspecified,
 ) {
   public companion object {
     @Composable
-    public fun defaultBackground(darkTheme: Boolean): PokedexBackground {
+    public fun defaultBackground(darkTheme: Boolean): CardShufflerBackground {
       return if (darkTheme) {
-        PokedexBackground(
+        CardShufflerBackground(
           color = colorResource(id = R.color.background_dark),
           tonalElevation = 0.dp,
         )
       } else {
-        PokedexBackground(
+        CardShufflerBackground(
           color = colorResource(id = R.color.background),
           tonalElevation = 0.dp,
         )
@@ -35,5 +33,5 @@ public data class PokedexBackground(
   }
 }
 
-public val LocalBackgroundTheme: ProvidableCompositionLocal<PokedexBackground> =
-  staticCompositionLocalOf { PokedexBackground() }
+public val LocalBackgroundTheme: ProvidableCompositionLocal<CardShufflerBackground> =
+  staticCompositionLocalOf { CardShufflerBackground() }

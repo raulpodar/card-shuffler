@@ -1,7 +1,6 @@
 
 
 @file:OptIn(ExperimentalComposeUiApi::class)
-
 package com.raulp.cardshuffler.compose.core.designsystem.theme
 
 import androidx.compose.foundation.background
@@ -19,19 +18,19 @@ import androidx.compose.ui.semantics.testTagsAsResourceId
 /**
  * Local providers for various properties we connect to our components, for styling.
  */
-private val LocalColors = compositionLocalOf<PokedexColors> {
-  error("No colors provided! Make sure to wrap all usages of Pokedex components in PokedexTheme.")
+private val LocalColors = compositionLocalOf<CardShufflerColors> {
+  error("No colors provided! Make sure to wrap all usages of CardShuffler components in CardShufflerTheme.")
 }
 
 @Composable
-public fun PokedexTheme(
+public fun CardShufflerTheme(
   darkTheme: Boolean = isSystemInDarkTheme(),
-  colors: PokedexColors = if (darkTheme) {
-    PokedexColors.defaultDarkColors()
+  colors: CardShufflerColors = if (darkTheme) {
+    CardShufflerColors.defaultDarkColors()
   } else {
-    PokedexColors.defaultLightColors()
+    CardShufflerColors.defaultLightColors()
   },
-  background: PokedexBackground = PokedexBackground.defaultBackground(darkTheme),
+  background: CardShufflerBackground = CardShufflerBackground.defaultBackground(darkTheme),
   content: @Composable () -> Unit,
 ) {
   CompositionLocalProvider(
@@ -52,19 +51,19 @@ public fun PokedexTheme(
  * Contains ease-of-use accessors for different properties used to style and customize the app
  * look and feel.
  */
-public object PokedexTheme {
+public object CardShufflerTheme {
   /**
-   * Retrieves the current [PokedexColors] at the call site's position in the hierarchy.
+   * Retrieves the current [CardShufflerColors] at the call site's position in the hierarchy.
    */
-  public val colors: PokedexColors
+  public val colors: CardShufflerColors
     @Composable
     @ReadOnlyComposable
     get() = LocalColors.current
 
   /**
-   * Retrieves the current [PokedexBackground] at the call site's position in the hierarchy.
+   * Retrieves the current [CardShufflerBackground] at the call site's position in the hierarchy.
    */
-  public val background: PokedexBackground
+  public val background: CardShufflerBackground
     @Composable
     @ReadOnlyComposable
     get() = LocalBackgroundTheme.current

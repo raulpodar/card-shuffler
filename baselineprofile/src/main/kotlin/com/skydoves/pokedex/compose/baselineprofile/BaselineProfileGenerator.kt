@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.baselineprofile
 
 import android.annotation.SuppressLint
@@ -61,8 +59,8 @@ class BaselineProfileGenerator {
       pressHome()
       startActivityAndWait()
 
-      // Start pokedex scenarios
-      pokedexScenarios()
+      // Start CardShuffler scenarios
+      CardShufflerScenarios()
     }
   }
 }

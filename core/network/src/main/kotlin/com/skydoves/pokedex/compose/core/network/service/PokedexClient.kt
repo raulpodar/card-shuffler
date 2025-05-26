@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.network.service
 
 import com.raulp.cardshuffler.compose.core.model.PokemonInfo
@@ -7,18 +5,18 @@ import com.raulp.cardshuffler.compose.core.network.model.PokemonResponse
 import com.skydoves.sandwich.ApiResponse
 import javax.inject.Inject
 
-class PokedexClient @Inject constructor(
-  private val pokedexService: PokedexService,
+class CardShufflerClient @Inject constructor(
+  private val CardShufflerService: CardShufflerService,
 ) {
 
   suspend fun fetchPokemonList(page: Int): ApiResponse<PokemonResponse> =
-    pokedexService.fetchPokemonList(
+    CardShufflerService.fetchPokemonList(
       limit = PAGING_SIZE,
       offset = page * PAGING_SIZE,
     )
 
   suspend fun fetchPokemonInfo(name: String): ApiResponse<PokemonInfo> =
-    pokedexService.fetchPokemonInfo(
+    CardShufflerService.fetchPokemonInfo(
       name = name,
     )
 

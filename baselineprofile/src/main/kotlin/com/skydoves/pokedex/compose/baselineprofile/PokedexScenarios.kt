@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.baselineprofile
 
 import androidx.benchmark.macro.MacrobenchmarkScope
@@ -10,30 +8,30 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.Until
 
-fun MacrobenchmarkScope.pokedexScenarios() {
+fun MacrobenchmarkScope.CardShufflerScenarios() {
   // -----------------
-  // Pokedex Home
+  // CardShuffler Home
   // -----------------
-  explorePokedexHome()
+  exploreCardShufflerHome()
   navigateFromHomeToDetails()
 
   // -----------------
-  // Pokedex Details
+  // CardShuffler Details
   // -----------------
   detailsWaitForContent()
 }
 
-fun MacrobenchmarkScope.explorePokedexHome() = device.apply {
+fun MacrobenchmarkScope.exploreCardShufflerHome() = device.apply {
   homeWaitForContent()
-  pokedexListScrollDownUp()
+  CardShufflerListScrollDownUp()
 }
 
 fun MacrobenchmarkScope.homeWaitForContent() = device.apply {
-  wait(Until.hasObject(By.res("PokedexList")), 15_000L)
+  wait(Until.hasObject(By.res("CardShufflerList")), 15_000L)
 }
 
-fun MacrobenchmarkScope.pokedexListScrollDownUp() = device.apply {
-  val channelList = waitAndFindObject(By.res("PokedexList"), 15_000L)
+fun MacrobenchmarkScope.CardShufflerListScrollDownUp() = device.apply {
+  val channelList = waitAndFindObject(By.res("CardShufflerList"), 15_000L)
   flingElementDownUp(channelList)
 }
 
@@ -43,7 +41,7 @@ fun MacrobenchmarkScope.navigateFromHomeToDetails() = device.apply {
 }
 
 fun MacrobenchmarkScope.detailsWaitForContent() = device.apply {
-  wait(Until.hasObject(By.res("PokedexDetails")), 15_000L)
+  wait(Until.hasObject(By.res("CardShufflerDetails")), 15_000L)
 }
 
 internal fun UiDevice.flingElementDownUp(element: UiObject2) {

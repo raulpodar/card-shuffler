@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.designsystem.component
 
 import androidx.compose.foundation.layout.Box
@@ -10,22 +8,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.raulp.cardshuffler.compose.core.designsystem.theme.PokedexTheme
+import com.raulp.cardshuffler.compose.core.designsystem.theme.CardShufflerTheme
 
 @Composable
-fun BoxScope.PokedexCircularProgress() {
+fun BoxScope.CardShufflerCircularProgress() {
   CircularProgressIndicator(
     modifier = Modifier.align(Alignment.Center),
-    color = PokedexTheme.colors.primary,
+    color = CardShufflerTheme.colors.primary,
   )
 }
 
 @Preview
 @Composable
-private fun PokedexCircularProgressPreview() {
-  PokedexTheme {
+private fun CardShufflerCircularProgressPreview() {
+  CardShufflerTheme {
     Box(modifier = Modifier.fillMaxSize()) {
-      PokedexCircularProgress()
+      CardShufflerCircularProgress()
     }
   }
 }

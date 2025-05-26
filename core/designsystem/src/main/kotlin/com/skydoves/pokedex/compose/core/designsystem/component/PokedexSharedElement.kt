@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.designsystem.component
 
 import androidx.compose.animation.AnimatedVisibilityScope
@@ -15,7 +13,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 
 context(SharedTransitionScope)
-fun Modifier.pokedexSharedElement(
+fun Modifier.CardShufflerSharedElement(
   isLocalInspectionMode: Boolean,
   state: SharedTransitionScope.SharedContentState,
   animatedVisibilityScope: AnimatedVisibilityScope,

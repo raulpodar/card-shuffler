@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.model
 
 import android.os.Parcelable

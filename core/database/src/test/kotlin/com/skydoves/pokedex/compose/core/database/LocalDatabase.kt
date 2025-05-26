@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.database
 
 import androidx.room.Room
@@ -14,12 +12,12 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [23])
 abstract class LocalDatabase {
-  lateinit var db: PokedexDatabase
+  lateinit var db: CardShufflerDatabase
 
   @Before
   fun initDB() {
     val json = Json { ignoreUnknownKeys = true }
-    db = Room.inMemoryDatabaseBuilder(getApplicationContext(), PokedexDatabase::class.java)
+    db = Room.inMemoryDatabaseBuilder(getApplicationContext(), CardShufflerDatabase::class.java)
       .allowMainThreadQueries()
       .addTypeConverter(TypeResponseConverter(json))
       .build()

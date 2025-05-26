@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.data
 
 import app.cash.turbine.test
@@ -7,8 +5,8 @@ import com.raulp.cardshuffler.compose.core.data.repository.home.HomeRepositoryIm
 import com.raulp.cardshuffler.compose.core.database.PokemonDao
 import com.raulp.cardshuffler.compose.core.database.entitiy.mapper.asEntity
 import com.raulp.cardshuffler.compose.core.network.model.PokemonResponse
-import com.raulp.cardshuffler.compose.core.network.service.PokedexClient
-import com.raulp.cardshuffler.compose.core.network.service.PokedexService
+import com.raulp.cardshuffler.compose.core.network.service.CardShufflerClient
+import com.raulp.cardshuffler.compose.core.network.service.CardShufflerService
 import com.raulp.cardshuffler.compose.core.test.MainCoroutinesRule
 import com.raulp.cardshuffler.compose.core.test.MockUtil.mockPokemonList
 import com.skydoves.sandwich.ApiResponse
@@ -30,8 +28,8 @@ import kotlin.time.toDuration
 class HomeRepositoryImplTest {
 
   private lateinit var repository: HomeRepositoryImpl
-  private lateinit var client: PokedexClient
-  private val service: PokedexService = mock()
+  private lateinit var client: CardShufflerClient
+  private val service: CardShufflerService = mock()
   private val pokemonDao: PokemonDao = mock()
 
   @get:Rule
@@ -39,7 +37,7 @@ class HomeRepositoryImplTest {
 
   @Before
   fun setup() {
-    client = PokedexClient(service)
+    client = CardShufflerClient(service)
     repository = HomeRepositoryImpl(client, pokemonDao, coroutinesRule.testDispatcher)
   }
 

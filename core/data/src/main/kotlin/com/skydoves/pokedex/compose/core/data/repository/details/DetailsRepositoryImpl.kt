@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.data.repository.details
 
 import androidx.annotation.VisibleForTesting
@@ -12,7 +10,7 @@ import com.raulp.cardshuffler.compose.core.network.Dispatcher
 import com.raulp.cardshuffler.compose.core.network.CardShufflerAppDispatchers
 import com.raulp.cardshuffler.compose.core.network.model.PokemonErrorResponse
 import com.raulp.cardshuffler.compose.core.network.model.mapper.ErrorResponseMapper
-import com.raulp.cardshuffler.compose.core.network.service.PokedexClient
+import com.raulp.cardshuffler.compose.core.network.service.CardShufflerClient
 import com.skydoves.sandwich.ApiResponse
 import com.skydoves.sandwich.map
 import com.skydoves.sandwich.onError
@@ -26,7 +24,7 @@ import javax.inject.Inject
 
 @VisibleForTesting
 class DetailsRepositoryImpl @Inject constructor(
-  private val pokedexClient: PokedexClient,
+  private val CardShufflerClient: CardShufflerClient,
   private val pokemonInfoDao: PokemonInfoDao,
   @Dispatcher(CardShufflerAppDispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
 ) : DetailsRepository {
@@ -40,7 +38,7 @@ class DetailsRepositoryImpl @Inject constructor(
          * fetches a [PokemonInfo] from the network and getting [ApiResponse] asynchronously.
          * @see [suspendOnSuccess](https://github.com/skydoves/sandwich#apiresponse-extensions-for-coroutines)
          */
-        val response = pokedexClient.fetchPokemonInfo(name = name)
+        val response = CardShufflerClient.fetchPokemonInfo(name = name)
         response.suspendOnSuccess {
           pokemonInfoDao.insertPokemonInfo(data.asEntity())
           emit(data)

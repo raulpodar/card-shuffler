@@ -1,6 +1,5 @@
 
 @file:OptIn(ExperimentalCoroutinesApi::class)
-
 package com.raulp.cardshuffler.compose.feature.details
 
 import android.util.Log

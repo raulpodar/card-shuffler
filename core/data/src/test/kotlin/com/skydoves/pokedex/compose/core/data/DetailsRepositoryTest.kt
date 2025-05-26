@@ -1,13 +1,11 @@
-
-
 package com.raulp.cardshuffler.compose.core.data
 
 import app.cash.turbine.test
 import com.raulp.cardshuffler.compose.core.data.repository.details.DetailsRepositoryImpl
 import com.raulp.cardshuffler.compose.core.database.PokemonInfoDao
 import com.raulp.cardshuffler.compose.core.database.entitiy.mapper.asEntity
-import com.raulp.cardshuffler.compose.core.network.service.PokedexClient
-import com.raulp.cardshuffler.compose.core.network.service.PokedexService
+import com.raulp.cardshuffler.compose.core.network.service.CardShufflerClient
+import com.raulp.cardshuffler.compose.core.network.service.CardShufflerService
 import com.raulp.cardshuffler.compose.core.test.MainCoroutinesRule
 import com.raulp.cardshuffler.compose.core.test.MockUtil.mockPokemonInfo
 import com.skydoves.sandwich.ApiResponse
@@ -29,8 +27,8 @@ import kotlin.time.toDuration
 class DetailsRepositoryTest {
 
   private lateinit var repository: DetailsRepositoryImpl
-  private lateinit var client: PokedexClient
-  private val service: PokedexService = mock()
+  private lateinit var client: CardShufflerClient
+  private val service: CardShufflerService = mock()
   private val pokemonInfoDao: PokemonInfoDao = mock()
 
   @get:Rule
@@ -38,7 +36,7 @@ class DetailsRepositoryTest {
 
   @Before
   fun setup() {
-    client = PokedexClient(service)
+    client = CardShufflerClient(service)
     repository = DetailsRepositoryImpl(client, pokemonInfoDao, coroutinesRule.testDispatcher)
   }
 

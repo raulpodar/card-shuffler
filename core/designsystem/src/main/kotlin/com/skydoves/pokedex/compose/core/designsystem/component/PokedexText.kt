@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.designsystem.component
 
 import androidx.compose.material3.LocalTextStyle
@@ -21,7 +19,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun PokedexText(
+fun CardShufflerText(
   text: String,
   previewText: String = text,
   modifier: Modifier = Modifier,
@@ -68,8 +66,8 @@ fun PokedexText(
 
 @Preview
 @Composable
-private fun PokedexTextPreview() {
-  PokedexText(
+private fun CardShufflerTextPreview() {
+  CardShufflerText(
     text = "pokemon",
     previewText = "preview text",
     fontSize = 30.sp,

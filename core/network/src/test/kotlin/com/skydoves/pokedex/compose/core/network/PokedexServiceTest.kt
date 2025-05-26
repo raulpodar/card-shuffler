@@ -1,8 +1,6 @@
-
-
 package com.raulp.cardshuffler.compose.core.network
 
-import com.raulp.cardshuffler.compose.core.network.service.PokedexService
+import com.raulp.cardshuffler.compose.core.network.service.CardShufflerService
 import com.skydoves.sandwich.ApiResponse
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -13,13 +11,13 @@ import org.junit.Test
 import java.io.IOException
 
 @ExperimentalCoroutinesApi
-class PokedexServiceTest : ApiAbstract<PokedexService>() {
+class CardShufflerServiceTest : ApiAbstract<CardShufflerService>() {
 
-  private lateinit var service: PokedexService
+  private lateinit var service: CardShufflerService
 
   @Before
   fun initService() {
-    service = createService(PokedexService::class.java)
+    service = createService(CardShufflerService::class.java)
   }
 
   @Throws(IOException::class)

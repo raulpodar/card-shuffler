@@ -1,31 +1,29 @@
-
-
 package com.raulp.cardshuffler.compose.core.designsystem.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.raulp.cardshuffler.compose.core.designsystem.theme.PokedexTheme
+import com.raulp.cardshuffler.compose.core.designsystem.theme.CardShufflerTheme
 
 @Composable
 fun getPokemonTypeColor(type: String): Color {
   return when (type) {
-    "fighting" -> PokedexTheme.colors.fighting
-    "flying" -> PokedexTheme.colors.flying
-    "poison" -> PokedexTheme.colors.poison
-    "ground" -> PokedexTheme.colors.ground
-    "rock" -> PokedexTheme.colors.rock
-    "bug" -> PokedexTheme.colors.bug
-    "ghost" -> PokedexTheme.colors.ghost
-    "steel" -> PokedexTheme.colors.steel
-    "fire" -> PokedexTheme.colors.fire
-    "water" -> PokedexTheme.colors.water
-    "grass" -> PokedexTheme.colors.grass
-    "electric" -> PokedexTheme.colors.electric
-    "psychic" -> PokedexTheme.colors.psychic
-    "ice" -> PokedexTheme.colors.ice
-    "dragon" -> PokedexTheme.colors.dragon
-    "fairy" -> PokedexTheme.colors.fairy
-    "dark" -> PokedexTheme.colors.dark
-    else -> PokedexTheme.colors.gray21
+    "fighting" -> CardShufflerTheme.colors.fighting
+    "flying" -> CardShufflerTheme.colors.flying
+    "poison" -> CardShufflerTheme.colors.poison
+    "ground" -> CardShufflerTheme.colors.ground
+    "rock" -> CardShufflerTheme.colors.rock
+    "bug" -> CardShufflerTheme.colors.bug
+    "ghost" -> CardShufflerTheme.colors.ghost
+    "steel" -> CardShufflerTheme.colors.steel
+    "fire" -> CardShufflerTheme.colors.fire
+    "water" -> CardShufflerTheme.colors.water
+    "grass" -> CardShufflerTheme.colors.grass
+    "electric" -> CardShufflerTheme.colors.electric
+    "psychic" -> CardShufflerTheme.colors.psychic
+    "ice" -> CardShufflerTheme.colors.ice
+    "dragon" -> CardShufflerTheme.colors.dragon
+    "fairy" -> CardShufflerTheme.colors.fairy
+    "dark" -> CardShufflerTheme.colors.dark
+    else -> CardShufflerTheme.colors.gray21
   }
 }

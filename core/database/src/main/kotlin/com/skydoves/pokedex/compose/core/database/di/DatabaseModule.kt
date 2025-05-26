@@ -1,10 +1,8 @@
-
-
 package com.raulp.cardshuffler.compose.core.database.di
 
 import android.app.Application
 import androidx.room.Room
-import com.raulp.cardshuffler.compose.core.database.PokedexDatabase
+import com.raulp.cardshuffler.compose.core.database.CardShufflerDatabase
 import com.raulp.cardshuffler.compose.core.database.PokemonDao
 import com.raulp.cardshuffler.compose.core.database.PokemonInfoDao
 import com.raulp.cardshuffler.compose.core.database.StatsResponseConverter
@@ -26,9 +24,9 @@ internal object DatabaseModule {
     application: Application,
     typeResponseConverter: TypeResponseConverter,
     statsResponseConverter: StatsResponseConverter,
-  ): PokedexDatabase {
+  ): CardShufflerDatabase {
     return Room
-      .databaseBuilder(application, PokedexDatabase::class.java, "Pokedex.db")
+      .databaseBuilder(application, CardShufflerDatabase::class.java, "CardShuffler.db")
       .fallbackToDestructiveMigration()
       .addTypeConverter(typeResponseConverter)
       .addTypeConverter(statsResponseConverter)
@@ -37,13 +35,13 @@ internal object DatabaseModule {
 
   @Provides
   @Singleton
-  fun providePokemonDao(appDatabase: PokedexDatabase): PokemonDao {
+  fun providePokemonDao(appDatabase: CardShufflerDatabase): PokemonDao {
     return appDatabase.pokemonDao()
   }
 
   @Provides
   @Singleton
-  fun providePokemonInfoDao(appDatabase: PokedexDatabase): PokemonInfoDao {
+  fun providePokemonInfoDao(appDatabase: CardShufflerDatabase): PokemonInfoDao {
     return appDatabase.pokemonInfoDao()
   }
 

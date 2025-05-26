@@ -28,7 +28,7 @@ android {
       properties.load(FileInputStream("$rootDir/local.properties"))
     }
     create("release") {
-      storeFile = file(properties["RELEASE_KEYSTORE_PATH"] ?: "../keystores/pokedex.jks")
+      storeFile = file(properties["RELEASE_KEYSTORE_PATH"] ?: "../keystores/CardShuffler.jks")
       keyAlias = properties["RELEASE_KEY_ALIAS"].toString()
       keyPassword = properties["RELEASE_KEY_PASSWORD"].toString()
       storePassword = properties["RELEASE_KEYSTORE_PASSWORD"].toString()

@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.database
 
 import androidx.room.ProvidedTypeConverter

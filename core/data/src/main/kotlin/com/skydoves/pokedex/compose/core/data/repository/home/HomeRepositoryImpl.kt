@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.data.repository.home
 
 import androidx.annotation.VisibleForTesting
@@ -10,7 +8,7 @@ import com.raulp.cardshuffler.compose.core.database.entitiy.mapper.asEntity
 import com.raulp.cardshuffler.compose.core.model.Pokemon
 import com.raulp.cardshuffler.compose.core.network.Dispatcher
 import com.raulp.cardshuffler.compose.core.network.CardShufflerAppDispatchers
-import com.raulp.cardshuffler.compose.core.network.service.PokedexClient
+import com.raulp.cardshuffler.compose.core.network.service.CardShufflerClient
 import com.skydoves.sandwich.ApiResponse
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onFailure
@@ -24,7 +22,7 @@ import javax.inject.Inject
 
 @VisibleForTesting
 class HomeRepositoryImpl @Inject constructor(
-  private val pokedexClient: PokedexClient,
+  private val CardShufflerClient: CardShufflerClient,
   private val pokemonDao: PokemonDao,
   @Dispatcher(CardShufflerAppDispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
 ) : HomeRepository {
@@ -42,7 +40,7 @@ class HomeRepositoryImpl @Inject constructor(
        * fetches a list of [Pokemon] from the network and getting [ApiResponse] asynchronously.
        * @see [suspendOnSuccess](https://github.com/skydoves/sandwich#apiresponse-extensions-for-coroutines)
        */
-      val response = pokedexClient.fetchPokemonList(page = page)
+      val response = CardShufflerClient.fetchPokemonList(page = page)
       response.suspendOnSuccess {
         pokemons = data.results
         pokemons.forEach { pokemon -> pokemon.page = page }

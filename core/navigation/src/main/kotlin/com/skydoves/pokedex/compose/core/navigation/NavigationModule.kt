@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.navigation
 
 import dagger.Binds
@@ -15,6 +13,6 @@ internal interface NavigationModule {
   @Binds
   @Singleton
   fun provideComposeNavigator(
-    pokedexComposeNavigator: PokedexComposeNavigator,
-  ): AppComposeNavigator<PokedexScreen>
+    CardShufflerComposeNavigator: CardShufflerComposeNavigator,
+  ): AppComposeNavigator<CardShufflerScreen>
 }

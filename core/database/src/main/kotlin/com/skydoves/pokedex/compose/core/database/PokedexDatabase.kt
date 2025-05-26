@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.database
 
 import androidx.room.Database
@@ -14,7 +12,7 @@ import com.raulp.cardshuffler.compose.core.database.entitiy.PokemonInfoEntity
   exportSchema = true,
 )
 @TypeConverters(value = [TypeResponseConverter::class, StatsResponseConverter::class])
-abstract class PokedexDatabase : RoomDatabase() {
+abstract class CardShufflerDatabase : RoomDatabase() {
 
   abstract fun pokemonDao(): PokemonDao
   abstract fun pokemonInfoDao(): PokemonInfoDao

@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.network.service
 
 import com.raulp.cardshuffler.compose.core.model.PokemonInfo
@@ -9,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface PokedexService {
+interface CardShufflerService {
 
   @GET("pokemon")
   suspend fun fetchPokemonList(

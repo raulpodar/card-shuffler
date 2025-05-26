@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.feature.details
 
 import androidx.compose.runtime.Composable
@@ -9,11 +7,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import com.kmpalette.palette.graphics.Palette
-import com.raulp.cardshuffler.compose.core.designsystem.theme.PokedexTheme
+import com.raulp.cardshuffler.compose.core.designsystem.theme.CardShufflerTheme
 
 @Composable
 internal fun Palette?.paletteBackgroundBrush(): State<Brush> {
-  val defaultBackground = PokedexTheme.colors.background
+  val defaultBackground = CardShufflerTheme.colors.background
   return remember(this) {
     derivedStateOf {
       val light = this?.lightVibrantSwatch?.rgb

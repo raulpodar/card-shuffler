@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.designsystem.theme
 
 import androidx.compose.runtime.Composable
@@ -9,7 +7,7 @@ import androidx.compose.ui.res.colorResource
 import com.raulp.cardshuffler.compose.designsystem.R
 
 @Immutable
-public data class PokedexColors(
+public data class CardShufflerColors(
   val primary: Color,
   val background: Color,
   val backgroundLight: Color,
@@ -48,10 +46,10 @@ public data class PokedexColors(
     /**
      * Provides the default colors for the light mode of the app.
      *
-     * @return A [PokedexColors] instance holding our color palette.
+     * @return A [CardShufflerColors] instance holding our color palette.
      */
     @Composable
-    public fun defaultDarkColors(): PokedexColors = PokedexColors(
+    public fun defaultDarkColors(): CardShufflerColors = CardShufflerColors(
       primary = colorResource(id = R.color.colorPrimary),
       background = colorResource(id = R.color.background_dark),
       backgroundLight = colorResource(id = R.color.background800_dark),
@@ -89,10 +87,10 @@ public data class PokedexColors(
     /**
      * Provides the default colors for the light mode of the app.
      *
-     * @return A [PokedexColors] instance holding our color palette.
+     * @return A [CardShufflerColors] instance holding our color palette.
      */
     @Composable
-    public fun defaultLightColors(): PokedexColors = PokedexColors(
+    public fun defaultLightColors(): CardShufflerColors = CardShufflerColors(
       primary = colorResource(id = R.color.colorPrimary),
       background = colorResource(id = R.color.background),
       backgroundLight = colorResource(id = R.color.background800),

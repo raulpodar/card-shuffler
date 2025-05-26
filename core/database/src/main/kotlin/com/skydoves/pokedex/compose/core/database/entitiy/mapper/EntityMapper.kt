@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.core.database.entitiy.mapper
 
 interface EntityMapper<Domain, Entity> {

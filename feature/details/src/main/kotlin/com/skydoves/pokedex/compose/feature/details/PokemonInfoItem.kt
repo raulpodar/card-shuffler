@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.feature.details
 
 import androidx.compose.foundation.layout.Column
@@ -10,8 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.raulp.cardshuffler.compose.core.designsystem.component.PokedexText
-import com.raulp.cardshuffler.compose.core.designsystem.theme.PokedexTheme
+import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerText
+import com.raulp.cardshuffler.compose.core.designsystem.theme.CardShufflerTheme
 
 @Composable
 internal fun PokemonInfoItem(
@@ -19,19 +17,19 @@ internal fun PokemonInfoItem(
   content: String?,
 ) {
   Column(horizontalAlignment = Alignment.CenterHorizontally) {
-    PokedexText(
+    CardShufflerText(
       modifier = Modifier.padding(10.dp),
       text = title.orEmpty(),
       previewText = "24.0 KG",
-      color = PokedexTheme.colors.black,
+      color = CardShufflerTheme.colors.black,
       fontWeight = FontWeight.Bold,
       fontSize = 21.sp,
     )
 
-    PokedexText(
+    CardShufflerText(
       text = content.orEmpty(),
       previewText = "Weight",
-      color = PokedexTheme.colors.white56,
+      color = CardShufflerTheme.colors.white56,
       fontWeight = FontWeight.Bold,
       fontSize = 12.sp,
     )

@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose.feature.home
 
 import android.content.res.Configuration
@@ -47,21 +45,21 @@ import com.skydoves.landscapist.palette.PalettePlugin
 import com.skydoves.landscapist.palette.rememberPaletteState
 import com.raulp.cardshuffler.compose.core.data.repository.home.FakeHomeRepository
 import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerAppBar
-import com.raulp.cardshuffler.compose.core.designsystem.component.PokedexCircularProgress
-import com.raulp.cardshuffler.compose.core.designsystem.component.pokedexSharedElement
-import com.raulp.cardshuffler.compose.core.designsystem.theme.PokedexTheme
+import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerCircularProgress
+import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerSharedElement
+import com.raulp.cardshuffler.compose.core.designsystem.theme.CardShufflerTheme
 import com.raulp.cardshuffler.compose.core.model.Pokemon
-import com.raulp.cardshuffler.compose.core.navigation.PokedexScreen
+import com.raulp.cardshuffler.compose.core.navigation.CardShufflerScreen
 import com.raulp.cardshuffler.compose.core.navigation.boundsTransform
 import com.raulp.cardshuffler.compose.core.navigation.currentComposeNavigator
-import com.raulp.cardshuffler.compose.core.preview.PokedexPreviewTheme
+import com.raulp.cardshuffler.compose.core.preview.CardShufflerPreviewTheme
 import com.raulp.cardshuffler.compose.core.preview.PreviewUtils
 import com.raulp.cardshuffler.compose.designsystem.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
 @Composable
-fun SharedTransitionScope.PokedexHome(
+fun SharedTransitionScope.CardShufflerHome(
   animatedVisibilityScope: AnimatedVisibilityScope,
   homeViewModel: HomeViewModel = hiltViewModel(),
 ) {
@@ -90,7 +88,7 @@ private fun SharedTransitionScope.HomeContent(
   Box(modifier = Modifier.fillMaxSize()) {
     val threadHold = 8
     LazyVerticalGrid(
-      modifier = Modifier.testTag("PokedexList"),
+      modifier = Modifier.testTag("CardShufflerList"),
       columns = GridCells.Fixed(2),
       contentPadding = PaddingValues(6.dp),
     ) {
@@ -112,7 +110,7 @@ private fun SharedTransitionScope.HomeContent(
     }
 
     if (uiState == HomeUiState.Loading) {
-      PokedexCircularProgress()
+      CardShufflerCircularProgress()
     }
   }
 }
@@ -132,7 +130,7 @@ private fun SharedTransitionScope.PokemonCard(
       .fillMaxWidth()
       .testTag("Pokemon")
       .clickable {
-        composeNavigator.navigate(PokedexScreen.Details(pokemon = pokemon))
+        composeNavigator.navigate(CardShufflerScreen.Details(pokemon = pokemon))
       },
     shape = RoundedCornerShape(14.dp),
     colors = CardColors(
@@ -148,7 +146,7 @@ private fun SharedTransitionScope.PokemonCard(
         .align(Alignment.CenterHorizontally)
         .padding(top = 20.dp)
         .size(120.dp)
-        .pokedexSharedElement(
+        .CardShufflerSharedElement(
           isLocalInspectionMode = LocalInspectionMode.current,
           state = rememberSharedContentState(key = "image-${pokemon.name}"),
           animatedVisibilityScope = animatedVisibilityScope,
@@ -175,7 +173,7 @@ private fun SharedTransitionScope.PokemonCard(
       modifier = Modifier
         .align(Alignment.CenterHorizontally)
         .fillMaxWidth()
-        .pokedexSharedElement(
+        .CardShufflerSharedElement(
           isLocalInspectionMode = LocalInspectionMode.current,
           state = rememberSharedContentState(key = "name-${pokemon.name}"),
           animatedVisibilityScope = animatedVisibilityScope,
@@ -183,7 +181,7 @@ private fun SharedTransitionScope.PokemonCard(
         )
         .padding(12.dp),
       text = pokemon.name,
-      color = PokedexTheme.colors.black,
+      color = CardShufflerTheme.colors.black,
       textAlign = TextAlign.Center,
       fontSize = 16.sp,
       fontWeight = FontWeight.Bold,
@@ -194,11 +192,11 @@ private fun SharedTransitionScope.PokemonCard(
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun PokedexHomePreview() {
-  PokedexTheme {
+private fun CardShufflerHomePreview() {
+  CardShufflerTheme {
     SharedTransitionScope {
       AnimatedVisibility(visible = true, label = "") {
-        PokedexHome(
+        CardShufflerHome(
           animatedVisibilityScope = this,
           homeViewModel = HomeViewModel(homeRepository = FakeHomeRepository()),
         )
@@ -211,7 +209,7 @@ private fun PokedexHomePreview() {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun HomeContentPreview() {
-  PokedexPreviewTheme { scope ->
+  CardShufflerPreviewTheme { scope ->
     HomeContent(
       animatedVisibilityScope = scope,
       uiState = HomeUiState.Idle,

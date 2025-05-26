@@ -1,9 +1,7 @@
-
-
 package com.raulp.cardshuffler.compose.core.network.di
 
-import com.raulp.cardshuffler.compose.core.network.service.PokedexClient
-import com.raulp.cardshuffler.compose.core.network.service.PokedexService
+import com.raulp.cardshuffler.compose.core.network.service.CardShufflerClient
+import com.raulp.cardshuffler.compose.core.network.service.CardShufflerService
 import com.raulp.cardshuffler.core.network.BuildConfig
 import com.skydoves.sandwich.retrofit.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
@@ -57,13 +55,13 @@ internal object NetworkModule {
 
   @Provides
   @Singleton
-  fun providePokedexService(retrofit: Retrofit): PokedexService {
-    return retrofit.create(PokedexService::class.java)
+  fun provideCardShufflerService(retrofit: Retrofit): CardShufflerService {
+    return retrofit.create(CardShufflerService::class.java)
   }
 
   @Provides
   @Singleton
-  fun providePokedexClient(pokedexService: PokedexService): PokedexClient {
-    return PokedexClient(pokedexService)
+  fun provideCardShufflerClient(CardShufflerService: CardShufflerService): CardShufflerClient {
+    return CardShufflerClient(CardShufflerService)
   }
 }
