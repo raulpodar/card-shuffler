@@ -3,11 +3,11 @@ plugins {
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.compose.compiler)
   alias(libs.plugins.baselineprofile)
-  id("skydoves.pokedex.spotless")
+  id("raulp.cardshuffler.spotless")
 }
 
 android {
-  namespace = "com.skydoves.pokedex.compose.baselineprofile"
+  namespace = "com.raulp.cardshuffler.compose.baselineprofile"
   compileSdk = 35
 
   compileOptions {

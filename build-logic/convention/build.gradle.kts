@@ -2,7 +2,7 @@ plugins {
   `kotlin-dsl`
 }
 
-group = "com.skydoves.pokedex.compose.buildlogic"
+group = "com.raulp.cardshuffler.compose.buildlogic"
 
 java {
   toolchain {
@@ -20,31 +20,31 @@ dependencies {
 gradlePlugin {
   plugins {
     register("androidApplicationCompose") {
-      id = "skydoves.pokedex.android.application.compose"
+      id = "raulp.cardshuffler.android.application.compose"
       implementationClass = "AndroidApplicationComposeConventionPlugin"
     }
     register("androidApplication") {
-      id = "skydoves.pokedex.android.application"
+      id = "raulp.cardshuffler.android.application"
       implementationClass = "AndroidApplicationConventionPlugin"
     }
     register("androidLibraryCompose") {
-      id = "skydoves.pokedex.android.library.compose"
+      id = "raulp.cardshuffler.android.library.compose"
       implementationClass = "AndroidLibraryComposeConventionPlugin"
     }
     register("androidLibrary") {
-      id = "skydoves.pokedex.android.library"
+      id = "raulp.cardshuffler.android.library"
       implementationClass = "AndroidLibraryConventionPlugin"
     }
     register("androidFeature") {
-      id = "skydoves.pokedex.android.feature"
+      id = "raulp.cardshuffler.android.feature"
       implementationClass = "AndroidFeatureConventionPlugin"
     }
     register("androidHilt") {
-      id = "skydoves.pokedex.android.hilt"
+      id = "raulp.cardshuffler.android.hilt"
       implementationClass = "AndroidHiltConventionPlugin"
     }
     register("spotless") {
-      id = "skydoves.pokedex.spotless"
+      id = "raulp.cardshuffler.spotless"
       implementationClass = "SpotlessConventionPlugin"
     }
   }
