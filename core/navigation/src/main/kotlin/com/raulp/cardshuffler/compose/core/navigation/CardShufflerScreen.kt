@@ -16,4 +16,10 @@ sealed interface CardShufflerScreen {
       val typeMap = mapOf(typeOf<Pokemon>() to PokemonType)
     }
   }
+
+  @Serializable
+  data object CardList : CardShufflerScreen
+
+  @Serializable
+  data object SettingsScreen : CardShufflerScreen
 }
