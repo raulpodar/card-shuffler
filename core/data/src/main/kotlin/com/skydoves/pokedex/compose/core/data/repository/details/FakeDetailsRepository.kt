@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.data.repository.details
 
 import com.raulp.cardshuffler.compose.core.model.PokemonInfo

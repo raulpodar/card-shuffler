@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.designsystem.component
 
 import androidx.compose.animation.AnimatedVisibilityScope
@@ -13,7 +15,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 
 context(SharedTransitionScope)
-fun Modifier.CardShufflerSharedElement(
+fun Modifier.cardShufflerSharedElement(
   isLocalInspectionMode: Boolean,
   state: SharedTransitionScope.SharedContentState,
   animatedVisibilityScope: AnimatedVisibilityScope,
@@ -23,20 +25,18 @@ fun Modifier.CardShufflerSharedElement(
   renderInOverlayDuringTransition: Boolean = true,
   zIndexInOverlay: Float = 0f,
   clipInOverlayDuringTransition: SharedTransitionScope.OverlayClip = ParentClip,
-): Modifier {
-  return if (isLocalInspectionMode) {
-    this
-  } else {
-    this.sharedElement(
-      state = state,
-      animatedVisibilityScope = animatedVisibilityScope,
-      boundsTransform = boundsTransform,
-      placeHolderSize = placeHolderSize,
-      renderInOverlayDuringTransition = renderInOverlayDuringTransition,
-      zIndexInOverlay = zIndexInOverlay,
-      clipInOverlayDuringTransition = clipInOverlayDuringTransition,
-    )
-  }
+): Modifier = if (isLocalInspectionMode) {
+  this
+} else {
+  this.sharedElement(
+    state = state,
+    animatedVisibilityScope = animatedVisibilityScope,
+    boundsTransform = boundsTransform,
+    placeHolderSize = placeHolderSize,
+    renderInOverlayDuringTransition = renderInOverlayDuringTransition,
+    zIndexInOverlay = zIndexInOverlay,
+    clipInOverlayDuringTransition = clipInOverlayDuringTransition,
+  )
 }
 
 private val ParentClip: SharedTransitionScope.OverlayClip =
@@ -46,9 +46,7 @@ private val ParentClip: SharedTransitionScope.OverlayClip =
       bounds: Rect,
       layoutDirection: LayoutDirection,
       density: Density,
-    ): Path? {
-      return state.parentSharedContentState?.clipPathInOverlay
-    }
+    ): Path? = state.parentSharedContentState?.clipPathInOverlay
   }
 
 private val DefaultSpring = spring(

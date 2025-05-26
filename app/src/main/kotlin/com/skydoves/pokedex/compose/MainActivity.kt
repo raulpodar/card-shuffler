@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose
 
 import android.os.Bundle
@@ -6,8 +8,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.CompositionLocalProvider
 import com.raulp.cardshuffler.compose.core.navigation.AppComposeNavigator
-import com.raulp.cardshuffler.compose.core.navigation.LocalComposeNavigator
 import com.raulp.cardshuffler.compose.core.navigation.CardShufflerScreen
+import com.raulp.cardshuffler.compose.core.navigation.LocalComposeNavigator
 import com.raulp.cardshuffler.compose.ui.CardShufflerMain
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

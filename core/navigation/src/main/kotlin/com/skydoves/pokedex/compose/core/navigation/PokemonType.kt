@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.navigation
 
 import android.net.Uri
@@ -17,9 +19,7 @@ object PokemonType : NavType<Pokemon>(isNullableAllowed = false) {
   override fun get(bundle: Bundle, key: String): Pokemon? =
     BundleCompat.getParcelable(bundle, key, Pokemon::class.java)
 
-  override fun parseValue(value: String): Pokemon {
-    return Json.decodeFromString(Uri.decode(value))
-  }
+  override fun parseValue(value: String): Pokemon = Json.decodeFromString(Uri.decode(value))
 
   override fun serializeAsValue(value: Pokemon): String = Uri.encode(Json.encodeToString(value))
 }

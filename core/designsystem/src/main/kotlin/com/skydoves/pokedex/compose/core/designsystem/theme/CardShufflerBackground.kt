@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.designsystem.theme
 
 import androidx.compose.runtime.Composable
@@ -17,18 +19,16 @@ public data class CardShufflerBackground(
 ) {
   public companion object {
     @Composable
-    public fun defaultBackground(darkTheme: Boolean): CardShufflerBackground {
-      return if (darkTheme) {
-        CardShufflerBackground(
-          color = colorResource(id = R.color.background_dark),
-          tonalElevation = 0.dp,
-        )
-      } else {
-        CardShufflerBackground(
-          color = colorResource(id = R.color.background),
-          tonalElevation = 0.dp,
-        )
-      }
+    public fun defaultBackground(darkTheme: Boolean): CardShufflerBackground = if (darkTheme) {
+      CardShufflerBackground(
+        color = colorResource(id = R.color.background_dark),
+        tonalElevation = 0.dp,
+      )
+    } else {
+      CardShufflerBackground(
+        color = colorResource(id = R.color.background),
+        tonalElevation = 0.dp,
+      )
     }
   }
 }

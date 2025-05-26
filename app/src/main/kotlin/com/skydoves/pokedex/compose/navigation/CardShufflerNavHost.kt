@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.navigation
 
 import androidx.compose.animation.SharedTransitionLayout
@@ -13,7 +15,7 @@ fun CardShufflerNavHost(navHostController: NavHostController) {
       navController = navHostController,
       startDestination = CardShufflerScreen.Home,
     ) {
-      CardShufflerNavigation()
+      cardShufflerNavigation()
     }
   }
 }

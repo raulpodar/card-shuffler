@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.model
 
 import androidx.compose.runtime.Immutable
@@ -54,14 +56,10 @@ data class PokemonInfo(
   )
 
   @Serializable
-  data class Stat(
-    @SerialName(value = "name") val name: String,
-  )
+  data class Stat(@SerialName(value = "name") val name: String)
 
   @Serializable
-  data class Type(
-    @SerialName(value = "name") val name: String,
-  )
+  data class Type(@SerialName(value = "name") val name: String)
 
   companion object {
     const val MAX_HP = 300

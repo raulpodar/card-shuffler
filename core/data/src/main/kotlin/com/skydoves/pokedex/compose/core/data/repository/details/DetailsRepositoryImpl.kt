@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.data.repository.details
 
 import androidx.annotation.VisibleForTesting
@@ -6,8 +8,8 @@ import com.raulp.cardshuffler.compose.core.database.PokemonInfoDao
 import com.raulp.cardshuffler.compose.core.database.entitiy.mapper.asDomain
 import com.raulp.cardshuffler.compose.core.database.entitiy.mapper.asEntity
 import com.raulp.cardshuffler.compose.core.model.PokemonInfo
-import com.raulp.cardshuffler.compose.core.network.Dispatcher
 import com.raulp.cardshuffler.compose.core.network.CardShufflerAppDispatchers
+import com.raulp.cardshuffler.compose.core.network.Dispatcher
 import com.raulp.cardshuffler.compose.core.network.model.PokemonErrorResponse
 import com.raulp.cardshuffler.compose.core.network.model.mapper.ErrorResponseMapper
 import com.raulp.cardshuffler.compose.core.network.service.CardShufflerClient
@@ -26,7 +28,8 @@ import javax.inject.Inject
 class DetailsRepositoryImpl @Inject constructor(
   private val CardShufflerClient: CardShufflerClient,
   private val pokemonInfoDao: PokemonInfoDao,
-  @Dispatcher(CardShufflerAppDispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
+  @Dispatcher(cardShufflerAppDispatchers = CardShufflerAppDispatchers.IO) private val ioDispatcher:
+  CoroutineDispatcher,
 ) : DetailsRepository {
 
   @WorkerThread

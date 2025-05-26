@@ -1,6 +1,7 @@
 
 
 @file:Suppress("SpellCheckingInspection")
+
 package com.raulp.cardshuffler.compose.core.test
 
 import kotlinx.coroutines.Dispatchers
@@ -12,9 +13,8 @@ import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
-class MainCoroutinesRule(
-  val testDispatcher: TestDispatcher = UnconfinedTestDispatcher(),
-) : TestWatcher() {
+class MainCoroutinesRule(val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()) :
+  TestWatcher() {
 
   val testScope = TestScope(testDispatcher)
 

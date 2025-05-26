@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.baselineprofile
 
 import androidx.benchmark.macro.MacrobenchmarkScope
@@ -8,7 +10,7 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.Until
 
-fun MacrobenchmarkScope.CardShufflerScenarios() {
+fun MacrobenchmarkScope.cardShufflerScenarios() {
   // -----------------
   // CardShuffler Home
   // -----------------
@@ -23,14 +25,14 @@ fun MacrobenchmarkScope.CardShufflerScenarios() {
 
 fun MacrobenchmarkScope.exploreCardShufflerHome() = device.apply {
   homeWaitForContent()
-  CardShufflerListScrollDownUp()
+  cardShufflerListScrollDownUp()
 }
 
 fun MacrobenchmarkScope.homeWaitForContent() = device.apply {
   wait(Until.hasObject(By.res("CardShufflerList")), 15_000L)
 }
 
-fun MacrobenchmarkScope.CardShufflerListScrollDownUp() = device.apply {
+fun MacrobenchmarkScope.cardShufflerListScrollDownUp() = device.apply {
   val channelList = waitAndFindObject(By.res("CardShufflerList"), 15_000L)
   flingElementDownUp(channelList)
 }

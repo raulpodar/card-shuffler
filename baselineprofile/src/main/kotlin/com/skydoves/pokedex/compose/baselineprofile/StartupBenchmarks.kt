@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.baselineprofile
 
 import androidx.benchmark.macro.BaselineProfileMode
@@ -61,7 +63,7 @@ class StartupBenchmarks {
       measureBlock = {
         startActivityAndWait()
 
-        CardShufflerScenarios()
+        cardShufflerScenarios()
       },
     )
   }

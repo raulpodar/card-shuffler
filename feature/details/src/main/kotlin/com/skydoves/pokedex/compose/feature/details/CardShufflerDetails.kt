@@ -1,7 +1,6 @@
 package com.raulp.cardshuffler.compose.feature.details
 
 import android.content.res.Configuration
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
@@ -23,14 +22,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.testTag
@@ -46,7 +42,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmpalette.palette.graphics.Palette
 import com.skydoves.landscapist.ImageOptions
-import com.skydoves.landscapist.animation.crossfade.CrossfadePlugin
 import com.skydoves.landscapist.components.rememberImageComponent
 import com.skydoves.landscapist.glide.GlideImage
 import com.skydoves.landscapist.palette.PalettePlugin
@@ -54,7 +49,7 @@ import com.skydoves.landscapist.palette.rememberPaletteState
 import com.raulp.cardshuffler.compose.core.data.repository.details.FakeDetailsRepository
 import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerCircularProgress
 import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerText
-import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerSharedElement
+import com.raulp.cardshuffler.compose.core.designsystem.component.cardShufflerSharedElement
 import com.raulp.cardshuffler.compose.core.designsystem.theme.CardShufflerTheme
 import com.raulp.cardshuffler.compose.core.designsystem.utils.getPokemonTypeColor
 import com.raulp.cardshuffler.compose.core.model.Pokemon
@@ -168,7 +163,7 @@ private fun SharedTransitionScope.DetailsHeader(
         .align(Alignment.BottomCenter)
         .padding(bottom = 20.dp)
         .size(190.dp)
-        .CardShufflerSharedElement(
+        .cardShufflerSharedElement(
           isLocalInspectionMode = LocalInspectionMode.current,
           state = rememberSharedContentState(key = "image-${pokemon?.name}"),
           animatedVisibilityScope = animatedVisibilityScope,
@@ -195,7 +190,7 @@ private fun SharedTransitionScope.DetailsHeader(
     modifier = Modifier
       .padding(top = 24.dp)
       .fillMaxWidth()
-      .CardShufflerSharedElement(
+      .cardShufflerSharedElement(
         isLocalInspectionMode = LocalInspectionMode.current,
         state = rememberSharedContentState(key = "name-${pokemon?.name}"),
         animatedVisibilityScope = animatedVisibilityScope,

@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.baselineprofile
 
 import android.annotation.SuppressLint
@@ -60,7 +62,7 @@ class BaselineProfileGenerator {
       startActivityAndWait()
 
       // Start CardShuffler scenarios
-      CardShufflerScenarios()
+      cardShufflerScenarios()
     }
   }
 }

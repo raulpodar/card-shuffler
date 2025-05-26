@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.database
 
 import androidx.room.ProvidedTypeConverter
@@ -8,17 +10,11 @@ import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 @ProvidedTypeConverter
-class StatsResponseConverter @Inject constructor(
-  private val json: Json,
-) {
+class StatsResponseConverter @Inject constructor(private val json: Json) {
 
   @TypeConverter
-  fun fromString(value: String): List<PokemonInfo.StatsResponse>? {
-    return json.decodeFromString(value)
-  }
+  fun fromString(value: String): List<PokemonInfo.StatsResponse>? = json.decodeFromString(value)
 
   @TypeConverter
-  fun fromInfoType(type: List<PokemonInfo.StatsResponse>?): String {
-    return json.encodeToString(type)
-  }
+  fun fromInfoType(type: List<PokemonInfo.StatsResponse>?): String = json.encodeToString(type)
 }

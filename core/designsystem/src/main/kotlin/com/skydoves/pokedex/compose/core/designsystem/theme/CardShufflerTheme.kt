@@ -1,6 +1,7 @@
 
 
 @file:OptIn(ExperimentalComposeUiApi::class)
+
 package com.raulp.cardshuffler.compose.core.designsystem.theme
 
 import androidx.compose.foundation.background
@@ -19,7 +20,9 @@ import androidx.compose.ui.semantics.testTagsAsResourceId
  * Local providers for various properties we connect to our components, for styling.
  */
 private val LocalColors = compositionLocalOf<CardShufflerColors> {
-  error("No colors provided! Make sure to wrap all usages of CardShuffler components in CardShufflerTheme.")
+  error(
+    "No colors provided! Make sure to wrap all usages of CardShuffler components in CardShufflerTheme.",
+  )
 }
 
 @Composable

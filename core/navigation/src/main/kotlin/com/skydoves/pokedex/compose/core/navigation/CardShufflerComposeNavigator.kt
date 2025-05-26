@@ -1,12 +1,18 @@
+
+
 package com.raulp.cardshuffler.compose.core.navigation
 
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.navOptions
 import javax.inject.Inject
 
-class CardShufflerComposeNavigator @Inject constructor() : AppComposeNavigator<CardShufflerScreen>() {
+class CardShufflerComposeNavigator @Inject constructor() :
+  AppComposeNavigator<CardShufflerScreen>() {
 
-  override fun navigate(route: CardShufflerScreen, optionsBuilder: (NavOptionsBuilder.() -> Unit)?) {
+  override fun navigate(
+    route: CardShufflerScreen,
+    optionsBuilder: (NavOptionsBuilder.() -> Unit)?,
+  ) {
     val options = optionsBuilder?.let { navOptions(it) }
     navigationCommands.tryEmit(ComposeNavigationCommand.NavigateToRoute(route, options))
   }

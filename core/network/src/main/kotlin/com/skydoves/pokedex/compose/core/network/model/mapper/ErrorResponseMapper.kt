@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.network.model.mapper
 
 import com.raulp.cardshuffler.compose.core.network.model.PokemonErrorResponse
@@ -19,7 +21,6 @@ object ErrorResponseMapper : ApiErrorModelMapper<PokemonErrorResponse> {
    * @param apiErrorResponse The [ApiResponse.Failure.Error] error response from the network request.
    * @return A customized [PokemonErrorResponse] error response.
    */
-  override fun map(apiErrorResponse: ApiResponse.Failure.Error): PokemonErrorResponse {
-    return PokemonErrorResponse(apiErrorResponse.statusCode.code, apiErrorResponse.message())
-  }
+  override fun map(apiErrorResponse: ApiResponse.Failure.Error): PokemonErrorResponse =
+    PokemonErrorResponse(apiErrorResponse.statusCode.code, apiErrorResponse.message())
 }

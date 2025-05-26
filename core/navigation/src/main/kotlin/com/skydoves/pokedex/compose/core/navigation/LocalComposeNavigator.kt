@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.navigation
 
 import androidx.compose.runtime.Composable
@@ -5,7 +7,8 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf
 
-public val LocalComposeNavigator: ProvidableCompositionLocal<AppComposeNavigator<CardShufflerScreen>> =
+public val LocalComposeNavigator:
+  ProvidableCompositionLocal<AppComposeNavigator<CardShufflerScreen>> =
   compositionLocalOf {
     error(
       "No AppComposeNavigator provided! " +

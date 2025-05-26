@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.data.repository.home
 
 import androidx.annotation.VisibleForTesting
@@ -6,8 +8,8 @@ import com.raulp.cardshuffler.compose.core.database.PokemonDao
 import com.raulp.cardshuffler.compose.core.database.entitiy.mapper.asDomain
 import com.raulp.cardshuffler.compose.core.database.entitiy.mapper.asEntity
 import com.raulp.cardshuffler.compose.core.model.Pokemon
-import com.raulp.cardshuffler.compose.core.network.Dispatcher
 import com.raulp.cardshuffler.compose.core.network.CardShufflerAppDispatchers
+import com.raulp.cardshuffler.compose.core.network.Dispatcher
 import com.raulp.cardshuffler.compose.core.network.service.CardShufflerClient
 import com.skydoves.sandwich.ApiResponse
 import com.skydoves.sandwich.message
@@ -24,7 +26,8 @@ import javax.inject.Inject
 class HomeRepositoryImpl @Inject constructor(
   private val CardShufflerClient: CardShufflerClient,
   private val pokemonDao: PokemonDao,
-  @Dispatcher(CardShufflerAppDispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
+  @Dispatcher(cardShufflerAppDispatchers = CardShufflerAppDispatchers.IO) private val ioDispatcher:
+  CoroutineDispatcher,
 ) : HomeRepository {
 
   @WorkerThread
@@ -46,7 +49,8 @@ class HomeRepositoryImpl @Inject constructor(
         pokemons.forEach { pokemon -> pokemon.page = page }
         pokemonDao.insertPokemonList(pokemons.asEntity())
         emit(pokemonDao.getAllPokemonList(page).asDomain())
-      }.onFailure { // handles the all error cases from the API request fails.
+      }.onFailure {
+        // handles the all error cases from the API request fails.
         onError(message())
       }
     } else {

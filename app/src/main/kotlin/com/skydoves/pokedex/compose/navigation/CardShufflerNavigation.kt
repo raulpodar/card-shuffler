@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.navigation
 
 import androidx.compose.animation.SharedTransitionScope
@@ -8,7 +10,7 @@ import com.raulp.cardshuffler.compose.feature.details.CardShufflerDetails
 import com.raulp.cardshuffler.compose.feature.home.CardShufflerHome
 
 context(SharedTransitionScope)
-fun NavGraphBuilder.CardShufflerNavigation() {
+fun NavGraphBuilder.cardShufflerNavigation() {
   composable<CardShufflerScreen.Home> {
     CardShufflerHome(this)
   }

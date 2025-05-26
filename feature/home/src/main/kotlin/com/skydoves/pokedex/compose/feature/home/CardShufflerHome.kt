@@ -46,7 +46,7 @@ import com.skydoves.landscapist.palette.rememberPaletteState
 import com.raulp.cardshuffler.compose.core.data.repository.home.FakeHomeRepository
 import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerAppBar
 import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerCircularProgress
-import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerSharedElement
+import com.raulp.cardshuffler.compose.core.designsystem.component.cardShufflerSharedElement
 import com.raulp.cardshuffler.compose.core.designsystem.theme.CardShufflerTheme
 import com.raulp.cardshuffler.compose.core.model.Pokemon
 import com.raulp.cardshuffler.compose.core.navigation.CardShufflerScreen
@@ -146,7 +146,7 @@ private fun SharedTransitionScope.PokemonCard(
         .align(Alignment.CenterHorizontally)
         .padding(top = 20.dp)
         .size(120.dp)
-        .CardShufflerSharedElement(
+        .cardShufflerSharedElement(
           isLocalInspectionMode = LocalInspectionMode.current,
           state = rememberSharedContentState(key = "image-${pokemon.name}"),
           animatedVisibilityScope = animatedVisibilityScope,
@@ -173,7 +173,7 @@ private fun SharedTransitionScope.PokemonCard(
       modifier = Modifier
         .align(Alignment.CenterHorizontally)
         .fillMaxWidth()
-        .CardShufflerSharedElement(
+        .cardShufflerSharedElement(
           isLocalInspectionMode = LocalInspectionMode.current,
           state = rememberSharedContentState(key = "name-${pokemon.name}"),
           animatedVisibilityScope = animatedVisibilityScope,

@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.network.di
 
 import com.raulp.cardshuffler.compose.core.network.service.CardShufflerClient
@@ -28,40 +30,34 @@ internal object NetworkModule {
 
   @Provides
   @Singleton
-  fun provideOkHttpClient(): OkHttpClient {
-    return OkHttpClient.Builder()
-      .apply {
-        if (BuildConfig.DEBUG) {
-          this.addNetworkInterceptor(
-            HttpLoggingInterceptor().apply {
-              level = HttpLoggingInterceptor.Level.BODY
-            },
-          )
-        }
+  fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
+    .apply {
+      if (BuildConfig.DEBUG) {
+        this.addNetworkInterceptor(
+          HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+          },
+        )
       }
-      .build()
-  }
+    }
+    .build()
 
   @Provides
   @Singleton
-  fun provideRetrofit(json: Json, okHttpClient: OkHttpClient): Retrofit {
-    return Retrofit.Builder()
-      .client(okHttpClient)
-      .baseUrl("https://pokeapi.co/api/v2/")
-      .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
-      .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
-      .build()
-  }
+  fun provideRetrofit(json: Json, okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+    .client(okHttpClient)
+    .baseUrl("https://pokeapi.co/api/v2/")
+    .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+    .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
+    .build()
 
   @Provides
   @Singleton
-  fun provideCardShufflerService(retrofit: Retrofit): CardShufflerService {
-    return retrofit.create(CardShufflerService::class.java)
-  }
+  fun provideCardShufflerService(retrofit: Retrofit): CardShufflerService =
+    retrofit.create(CardShufflerService::class.java)
 
   @Provides
   @Singleton
-  fun provideCardShufflerClient(CardShufflerService: CardShufflerService): CardShufflerClient {
-    return CardShufflerClient(CardShufflerService)
-  }
+  fun provideCardShufflerClient(CardShufflerService: CardShufflerService): CardShufflerClient =
+    CardShufflerClient(CardShufflerService)
 }

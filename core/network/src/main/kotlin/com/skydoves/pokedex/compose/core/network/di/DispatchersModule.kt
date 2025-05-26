@@ -1,7 +1,9 @@
+
+
 package com.raulp.cardshuffler.compose.core.network.di
 
-import com.raulp.cardshuffler.compose.core.network.Dispatcher
 import com.raulp.cardshuffler.compose.core.network.CardShufflerAppDispatchers
+import com.raulp.cardshuffler.compose.core.network.Dispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,6 +16,6 @@ import kotlinx.coroutines.Dispatchers
 internal object DispatchersModule {
 
   @Provides
-  @Dispatcher(CardShufflerAppDispatchers.IO)
+  @Dispatcher(cardShufflerAppDispatchers = CardShufflerAppDispatchers.IO)
   fun providesIODispatcher(): CoroutineDispatcher = Dispatchers.IO
 }

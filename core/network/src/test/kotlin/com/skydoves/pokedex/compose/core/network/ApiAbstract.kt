@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.network
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
@@ -55,16 +57,14 @@ abstract class ApiAbstract<T> {
     mockWebServer.enqueue(mockResponse.setBody(source.readString(StandardCharsets.UTF_8)))
   }
 
-  fun createService(clazz: Class<T>): T {
-    return Retrofit.Builder()
-      .baseUrl(mockWebServer.url("/"))
-      .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
-      .addCallAdapterFactory(
-        ApiResponseCallAdapterFactory.create(
-          coroutineScope = coroutinesRule.testScope,
-        ),
-      )
-      .build()
-      .create(clazz)
-  }
+  fun createService(clazz: Class<T>): T = Retrofit.Builder()
+    .baseUrl(mockWebServer.url("/"))
+    .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+    .addCallAdapterFactory(
+      ApiResponseCallAdapterFactory.create(
+        coroutineScope = coroutinesRule.testScope,
+      ),
+    )
+    .build()
+    .create(clazz)
 }

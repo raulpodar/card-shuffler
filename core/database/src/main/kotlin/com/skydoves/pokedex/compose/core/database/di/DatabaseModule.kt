@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.database.di
 
 import android.app.Application
@@ -24,30 +26,23 @@ internal object DatabaseModule {
     application: Application,
     typeResponseConverter: TypeResponseConverter,
     statsResponseConverter: StatsResponseConverter,
-  ): CardShufflerDatabase {
-    return Room
-      .databaseBuilder(application, CardShufflerDatabase::class.java, "CardShuffler.db")
-      .fallbackToDestructiveMigration()
-      .addTypeConverter(typeResponseConverter)
-      .addTypeConverter(statsResponseConverter)
-      .build()
-  }
+  ): CardShufflerDatabase = Room
+    .databaseBuilder(application, CardShufflerDatabase::class.java, "CardShuffler.db")
+    .fallbackToDestructiveMigration()
+    .addTypeConverter(typeResponseConverter)
+    .addTypeConverter(statsResponseConverter)
+    .build()
 
   @Provides
   @Singleton
-  fun providePokemonDao(appDatabase: CardShufflerDatabase): PokemonDao {
-    return appDatabase.pokemonDao()
-  }
+  fun providePokemonDao(appDatabase: CardShufflerDatabase): PokemonDao = appDatabase.pokemonDao()
 
   @Provides
   @Singleton
-  fun providePokemonInfoDao(appDatabase: CardShufflerDatabase): PokemonInfoDao {
-    return appDatabase.pokemonInfoDao()
-  }
+  fun providePokemonInfoDao(appDatabase: CardShufflerDatabase): PokemonInfoDao =
+    appDatabase.pokemonInfoDao()
 
   @Provides
   @Singleton
-  fun provideTypeResponseConverter(json: Json): TypeResponseConverter {
-    return TypeResponseConverter(json)
-  }
+  fun provideTypeResponseConverter(json: Json): TypeResponseConverter = TypeResponseConverter(json)
 }
