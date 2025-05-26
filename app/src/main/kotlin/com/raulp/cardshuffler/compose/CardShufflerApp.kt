@@ -1,5 +1,3 @@
-
-
 package com.raulp.cardshuffler.compose
 
 import android.app.Application
