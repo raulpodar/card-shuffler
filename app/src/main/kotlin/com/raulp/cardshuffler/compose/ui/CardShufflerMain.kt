@@ -54,10 +54,12 @@ fun CardShufflerMain(composeNavigator: AppComposeNavigator<CardShufflerScreen>) 
                     val currentDestination = navBackStackEntry?.destination
 
                     navigationItems.forEach { item ->
+                        // Assuming item is NavItem(screen: CardShufflerScreen, label: String, icon: ImageVector)
+                        // And CardShufflerScreen.Home, .CardList, .SettingsScreen now have a .route property
                         NavigationBarItem(
-                            selected = currentDestination?.route == item.screen::class.simpleName,
+                            selected = currentDestination?.route == item.screen.route, // Changed
                             onClick = {
-                                navHostController.navigate(item.screen::class.simpleName ?: "") {
+                                navHostController.navigate(item.screen.route) { // Changed
                                     popUpTo(navHostController.graph.findStartDestination().id) {
                                         saveState = true
                                     }

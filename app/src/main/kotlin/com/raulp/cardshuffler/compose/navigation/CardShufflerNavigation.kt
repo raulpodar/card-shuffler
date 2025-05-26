@@ -13,21 +13,21 @@ import com.raulp.cardshuffler.compose.feature.settings.SettingsScreen
 
 context(SharedTransitionScope)
 fun NavGraphBuilder.cardShufflerNavigation() {
-  composable<CardShufflerScreen.Home> {
+  composable(CardShufflerScreen.Home.route) { // Changed
     CardShufflerHome(this)
   }
 
-  composable<CardShufflerScreen.Details>(
+  composable<CardShufflerScreen.Details>( // Stays the same
     typeMap = CardShufflerScreen.Details.typeMap,
   ) {
     CardShufflerDetails(this)
   }
 
-  composable<CardShufflerScreen.CardList> { // Updated route and call
+  composable(CardShufflerScreen.CardList.route) { // Changed
     CardListScreen()
   }
 
-  composable<CardShufflerScreen.SettingsScreen> {
+  composable(CardShufflerScreen.SettingsScreen.route) { // Changed
     SettingsScreen()
   }
 }
