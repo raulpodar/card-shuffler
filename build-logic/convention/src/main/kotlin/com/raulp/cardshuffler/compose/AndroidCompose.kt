@@ -18,7 +18,9 @@ internal fun Project.configureAndroidCompose(
     buildFeatures {
       compose = true
     }
+
   }
+
 
   extensions.configure<ComposeCompilerGradlePluginExtension> {
     enableStrongSkippingMode = true

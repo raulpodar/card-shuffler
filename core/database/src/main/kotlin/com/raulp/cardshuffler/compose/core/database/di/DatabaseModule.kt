@@ -9,6 +9,7 @@ import com.raulp.cardshuffler.compose.core.database.PokemonDao
 import com.raulp.cardshuffler.compose.core.database.PokemonInfoDao
 import com.raulp.cardshuffler.compose.core.database.StatsResponseConverter
 import com.raulp.cardshuffler.compose.core.database.TypeResponseConverter
+import com.raulp.cardshuffler.compose.core.database.entitiy.AndroidTopicDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,6 +37,10 @@ internal object DatabaseModule {
   @Provides
   @Singleton
   fun providePokemonDao(appDatabase: CardShufflerDatabase): PokemonDao = appDatabase.pokemonDao()
+
+  @Provides
+  @Singleton
+  fun provideAndroidTopicDao(appDatabase: CardShufflerDatabase): AndroidTopicDao = appDatabase.androidTopicDao()
 
   @Provides
   @Singleton

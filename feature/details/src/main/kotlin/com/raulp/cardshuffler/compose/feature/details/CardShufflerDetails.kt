@@ -1,5 +1,6 @@
 package com.raulp.cardshuffler.compose.feature.details
 
+import Flashcard
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.SharedTransitionScope
@@ -9,6 +10,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,6 +19,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
@@ -25,10 +29,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -41,24 +45,18 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmpalette.palette.graphics.Palette
-import com.skydoves.landscapist.ImageOptions
-import com.skydoves.landscapist.components.rememberImageComponent
-import com.skydoves.landscapist.glide.GlideImage
-import com.skydoves.landscapist.palette.PalettePlugin
-import com.skydoves.landscapist.palette.rememberPaletteState
 import com.raulp.cardshuffler.compose.core.data.repository.details.FakeDetailsRepository
 import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerCircularProgress
 import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerText
-import com.raulp.cardshuffler.compose.core.designsystem.component.cardShufflerSharedElement
 import com.raulp.cardshuffler.compose.core.designsystem.theme.CardShufflerTheme
 import com.raulp.cardshuffler.compose.core.designsystem.utils.getPokemonTypeColor
 import com.raulp.cardshuffler.compose.core.model.Pokemon
 import com.raulp.cardshuffler.compose.core.model.PokemonInfo
-import com.raulp.cardshuffler.compose.core.navigation.boundsTransform
 import com.raulp.cardshuffler.compose.core.navigation.currentComposeNavigator
 import com.raulp.cardshuffler.compose.core.preview.CardShufflerPreviewTheme
 import com.raulp.cardshuffler.compose.core.preview.PreviewUtils
 import com.raulp.cardshuffler.compose.designsystem.R
+import com.skydoves.landscapist.palette.rememberPaletteState
 
 @Composable
 fun SharedTransitionScope.CardShufflerDetails(
@@ -118,7 +116,7 @@ private fun SharedTransitionScope.DetailsHeader(
   Box(
     modifier = Modifier
       .fillMaxWidth()
-      .height(290.dp)
+      .fillMaxHeight()
       .shadow(elevation = 9.dp, shape = shape)
       .background(brush = backgroundBrush, shape = shape),
   ) {
@@ -158,51 +156,17 @@ private fun SharedTransitionScope.DetailsHeader(
       fontSize = 18.sp,
     )
 
-    GlideImage(
-      modifier = Modifier
-        .align(Alignment.BottomCenter)
-        .padding(bottom = 20.dp)
-        .size(190.dp)
-        .cardShufflerSharedElement(
-          isLocalInspectionMode = LocalInspectionMode.current,
-          state = rememberSharedContentState(key = "image-${pokemon?.name}"),
-          animatedVisibilityScope = animatedVisibilityScope,
-          boundsTransform = boundsTransform,
-        ),
-      imageModel = { pokemon?.imageUrl },
-      imageOptions = ImageOptions(contentScale = ContentScale.Inside),
-      component = rememberImageComponent {
-        if (!LocalInspectionMode.current) {
-          +PalettePlugin(
-            imageModel = pokemon?.imageUrl,
-            useCache = true,
-            paletteLoadedListener = { onPaletteLoaded.invoke(it) },
-          )
-        }
-      },
-      previewPlaceholder = painterResource(
-        id = R.drawable.pokemon_preview,
-      ),
-    )
-  }
 
-  CardShufflerText(
-    modifier = Modifier
-      .padding(top = 24.dp)
-      .fillMaxWidth()
-      .cardShufflerSharedElement(
-        isLocalInspectionMode = LocalInspectionMode.current,
-        state = rememberSharedContentState(key = "name-${pokemon?.name}"),
-        animatedVisibilityScope = animatedVisibilityScope,
-        boundsTransform = boundsTransform,
-      ),
-    text = pokemon?.name.orEmpty(),
-    previewText = "skydoves",
-    color = CardShufflerTheme.colors.black,
-    fontWeight = FontWeight.Bold,
-    textAlign = TextAlign.Center,
-    fontSize = 36.sp,
-  )
+    // Center the FlashcardProficiencyIndicator
+    Box(
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(top = 20.dp), // Adjust padding as needed for vertical positioning
+      contentAlignment = Alignment.Center
+    ) {
+      FlashcardProficiencyIndicator(proficiency = 35)
+    }
+  }
 }
 
 @Composable
@@ -250,6 +214,60 @@ private fun DetailsInfo(pokemonInfo: PokemonInfo) {
 }
 
 @Composable
+fun FlashcardProficiencyIndicator(proficiency: Int) {
+  val color = when {
+    proficiency >= 80 -> Color(0xFF4CAF50)  // Green
+    proficiency in 50..79 -> Color(0xFFFFC107) // Yellow
+    else -> Color(0xFFF44336) // Red
+  }
+
+  Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Box(
+      modifier = Modifier
+        .size(100.dp)
+        .clip(CircleShape)
+        .background(color),
+      contentAlignment = Alignment.Center
+    ) {
+      Text("$proficiency%", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+    }
+
+    Spacer(modifier = Modifier.height(8.dp))
+
+    CardShufflerText(
+      text = when {
+        proficiency >= 80 -> "Mastered"
+        proficiency in 50..79 -> "Review Needed"
+        else -> "Needs Practice"
+      },
+      color = CardShufflerTheme.colors.black,
+      fontWeight = FontWeight.Bold,
+      textAlign = TextAlign.Center,
+      fontSize = 24.sp,
+    )
+  }
+}
+
+@Preview
+@Composable
+fun FlashcardProficiencyIndicatorPreviewMastered() {
+  CardShufflerTheme {
+    FlashcardProficiencyIndicator(proficiency = 90)
+  }
+}
+
+@Preview
+@Composable
+fun FlashcardProficiencyIndicatorPreviewReview() {
+  CardShufflerTheme {
+    FlashcardProficiencyIndicator(proficiency = 65)
+  }
+}
+
+
+
+
+@Composable
 private fun DetailsStatus(
   pokemonInfo: PokemonInfo,
 ) {
@@ -272,7 +290,27 @@ private fun DetailsStatus(
       )
     }
   }
+  Flashcard(
+    question = "What is the capital of France?",
+    answer = "Paris",
+    onKnewThis = {
+      // Handle "I knew this" action, e.g., move to next card, update score
+      println("User knew the answer!")
+    },
+    onNeedToPractice = {
+      // Handle "I need to practice" action, e.g., mark for review
+      println("User needs to practice this one.")
+    }
+  )
+//  FlashcardStatus(
+//    question = "What is the capital of France?",
+//    answer = "Paris",
+//    onAnswerSelected = { }
+//  )
+
 }
+
+
 
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)

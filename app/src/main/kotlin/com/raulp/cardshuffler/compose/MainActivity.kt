@@ -2,15 +2,20 @@
 
 package com.raulp.cardshuffler.compose
 
+import Flashcard
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import com.raulp.cardshuffler.compose.core.navigation.AppComposeNavigator
 import com.raulp.cardshuffler.compose.core.navigation.CardShufflerScreen
-import com.raulp.cardshuffler.compose.core.navigation.LocalComposeNavigator
-import com.raulp.cardshuffler.compose.ui.CardShufflerMain
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -24,11 +29,30 @@ class MainActivity : ComponentActivity() {
     enableEdgeToEdge()
     super.onCreate(savedInstanceState)
 
+//    setContent {
+//      CompositionLocalProvider(
+//        LocalComposeNavigator provides composeNavigator,
+//      ) {
+//        CardShufflerMain(composeNavigator = composeNavigator)
+//      }
+//    }
+
     setContent {
-      CompositionLocalProvider(
-        LocalComposeNavigator provides composeNavigator,
-      ) {
-        CardShufflerMain(composeNavigator = composeNavigator)
+      MaterialTheme { // Or your app's theme
+        Surface(modifier = Modifier.fillMaxSize()) {
+          Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+          ) {
+            Flashcard(
+              question = "What is the capital of France?",
+              answer = "Paris",
+              onKnewThis = { /* ... */ },
+              onNeedToPractice = { /* ... */ }
+            )
+          }
+        }
       }
     }
   }

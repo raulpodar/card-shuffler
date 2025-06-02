@@ -99,6 +99,7 @@ dependencies {
 
   // compose
   implementation(libs.androidx.activity.compose)
+  implementation(libs.bundles.composeBundle)
   implementation(libs.androidx.compose.ui)
   implementation(libs.androidx.compose.runtime)
   implementation(libs.androidx.compose.foundation)
