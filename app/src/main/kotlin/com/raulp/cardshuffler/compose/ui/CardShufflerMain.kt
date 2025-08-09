@@ -4,8 +4,8 @@ package com.raulp.cardshuffler.compose.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -43,7 +43,7 @@ fun CardShufflerMain(composeNavigator: AppComposeNavigator<CardShufflerScreen>) 
 
         val navigationItems = listOf(
             NavItem(CardShufflerScreen.Home, "Home", Icons.Filled.Home),
-            NavItem(CardShufflerScreen.CardList, "Card List", Icons.Filled.List), // Changed line
+            NavItem(CardShufflerScreen.CardList, "CardList", Icons.AutoMirrored.Filled.List), // Changed line
             NavItem(CardShufflerScreen.SettingsScreen, "Settings", Icons.Filled.Settings)
         )
 
@@ -55,9 +55,9 @@ fun CardShufflerMain(composeNavigator: AppComposeNavigator<CardShufflerScreen>) 
 
                     navigationItems.forEach { item ->
                         NavigationBarItem(
-                            selected = currentDestination?.route == item.screen::class.simpleName,
+                            selected = currentDestination?.route == item.screen::class.qualifiedName,
                             onClick = {
-                                navHostController.navigate(item.screen::class.simpleName ?: "") {
+                                navHostController.navigate(item.screen) {
                                     popUpTo(navHostController.graph.findStartDestination().id) {
                                         saveState = true
                                     }

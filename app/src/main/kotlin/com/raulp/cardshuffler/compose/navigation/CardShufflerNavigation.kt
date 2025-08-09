@@ -23,7 +23,7 @@ fun NavGraphBuilder.cardShufflerNavigation() {
     CardShufflerDetails(this)
   }
 
-  composable<CardShufflerScreen.CardList> { // Updated route and call
+  composable<CardShufflerScreen.CardList> {
     CardListScreen()
   }
 

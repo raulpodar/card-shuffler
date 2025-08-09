@@ -1,7 +1,6 @@
 package com.raulp.cardshuffler.compose.feature.home
 
 import android.content.res.Configuration
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.clickable
@@ -38,11 +37,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmpalette.palette.graphics.Palette
-import com.skydoves.landscapist.ImageOptions
-import com.skydoves.landscapist.components.rememberImageComponent
-import com.skydoves.landscapist.glide.GlideImage
-import com.skydoves.landscapist.palette.PalettePlugin
-import com.skydoves.landscapist.palette.rememberPaletteState
 import com.raulp.cardshuffler.compose.core.data.repository.home.FakeHomeRepository
 import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerAppBar
 import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerCircularProgress
@@ -55,6 +49,11 @@ import com.raulp.cardshuffler.compose.core.navigation.currentComposeNavigator
 import com.raulp.cardshuffler.compose.core.preview.CardShufflerPreviewTheme
 import com.raulp.cardshuffler.compose.core.preview.PreviewUtils
 import com.raulp.cardshuffler.compose.designsystem.R
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.components.rememberImageComponent
+import com.skydoves.landscapist.glide.GlideImage
+import com.skydoves.landscapist.palette.PalettePlugin
+import com.skydoves.landscapist.palette.rememberPaletteState
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
@@ -189,21 +188,21 @@ private fun SharedTransitionScope.PokemonCard(
   }
 }
 
-@Preview
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun CardShufflerHomePreview() {
-  CardShufflerTheme {
-    SharedTransitionScope {
-      AnimatedVisibility(visible = true, label = "") {
-        CardShufflerHome(
-          animatedVisibilityScope = this,
-          homeViewModel = HomeViewModel(homeRepository = FakeHomeRepository()),
-        )
-      }
-    }
-  }
-}
+//@Preview
+//@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+//@Composable
+//private fun CardShufflerHomePreview() {
+//  CardShufflerTheme {
+//    SharedTransitionScope {
+//      AnimatedVisibility(visible = true, label = "") {
+//        CardShufflerHome(
+//          animatedVisibilityScope = this,
+//          homeViewModel = HomeViewModel(homeRepository = FakeHomeRepository()),
+//        )
+//      }
+//    }
+//  }
+//}
 
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)

@@ -1,6 +1,5 @@
 package com.raulp.cardshuffler.compose.feature.details
 
-import Flashcard
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.SharedTransitionScope
@@ -290,18 +289,18 @@ private fun DetailsStatus(
       )
     }
   }
-  Flashcard(
-    question = "What is the capital of France?",
-    answer = "Paris",
-    onKnewThis = {
-      // Handle "I knew this" action, e.g., move to next card, update score
-      println("User knew the answer!")
-    },
-    onNeedToPractice = {
-      // Handle "I need to practice" action, e.g., mark for review
-      println("User needs to practice this one.")
-    }
-  )
+//  Flashcard(
+//    question = "What is the capital of France?",
+//    answer = "Paris",
+//    onKnewThis = {
+//      // Handle "I knew this" action, e.g., move to next card, update score
+//      println("User knew the answer!")
+//    },
+//    onNeedToPractice = {
+//      // Handle "I need to practice" action, e.g., mark for review
+//      println("User needs to practice this one.")
+//    }
+//  )
 //  FlashcardStatus(
 //    question = "What is the capital of France?",
 //    answer = "Paris",
