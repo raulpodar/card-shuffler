@@ -2,14 +2,14 @@
 
 package com.raulp.cardshuffler.compose.core.test
 
-import com.raulp.cardshuffler.compose.core.model.Pokemon
+import com.raulp.cardshuffler.compose.core.model.Topic
 import com.raulp.cardshuffler.compose.core.model.PokemonInfo
 
 object MockUtil {
 
-  fun mockPokemon() = Pokemon(
+  fun mockPokemon() = Topic(
     page = 0,
-    nameField = "bulbasaur",
+    topicTitle = "bulbasaur",
     url = "https://pokeapi.co/api/v2/pokemon/1/",
   )
 

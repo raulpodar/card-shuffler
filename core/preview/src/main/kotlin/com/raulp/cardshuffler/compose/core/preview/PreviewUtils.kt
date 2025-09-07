@@ -2,19 +2,19 @@
 
 package com.raulp.cardshuffler.compose.core.preview
 
-import com.raulp.cardshuffler.compose.core.model.Pokemon
 import com.raulp.cardshuffler.compose.core.model.PokemonInfo
+import com.raulp.cardshuffler.compose.core.model.Topic
 
 object PreviewUtils {
 
-  fun mockPokemon() = Pokemon(
-    page = 0,
-    nameField = "bulbasaur",
+  fun mockPokemon() = Topic(
+    title = "bulbasaur",
+    id = "android",
     url = "https://pokeapi.co/api/v2/pokemon/1/",
   )
 
   fun mockPokemonList() = List(10) {
-    Pokemon(page = 0, nameField = "bulbasaur$it", url = "")
+    Topic(id = "android" , title = "bulbasaur$it", url = "")
   }
 
   fun mockPokemonInfo() = PokemonInfo(

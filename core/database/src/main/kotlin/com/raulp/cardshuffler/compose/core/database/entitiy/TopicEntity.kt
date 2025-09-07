@@ -4,4 +4,4 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class PokemonEntity(var page: Int = 0, @PrimaryKey val name: String, val url: String)
+data class TopicEntity(@PrimaryKey val id: String, val url: String, val title: String)

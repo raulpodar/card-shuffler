@@ -3,7 +3,7 @@ package com.raulp.cardshuffler.compose.feature.home
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.viewModelScope
 import com.raulp.cardshuffler.compose.core.data.repository.home.HomeRepository
-import com.raulp.cardshuffler.compose.core.model.Pokemon
+import com.raulp.cardshuffler.compose.core.model.Topic
 import com.raulp.cardshuffler.compose.core.viewmodel.BaseViewModel
 import com.raulp.cardshuffler.compose.core.viewmodel.ViewModelStateFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,8 +22,8 @@ class HomeViewModel @Inject constructor(
   internal val uiState: ViewModelStateFlow<HomeUiState> = viewModelStateFlow(HomeUiState.Loading)
 
   private val pokemonFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
-  val pokemonList: StateFlow<List<Pokemon>> = pokemonFetchingIndex.flatMapLatest { page ->
-    homeRepository.fetchPokemonList(
+  val topicList: StateFlow<List<Topic>> = pokemonFetchingIndex.flatMapLatest { page ->
+    homeRepository.fetchTopicList(
       page = page,
       onStart = { uiState.tryEmit(key, HomeUiState.Loading) },
       onComplete = { uiState.tryEmit(key, HomeUiState.Idle) },

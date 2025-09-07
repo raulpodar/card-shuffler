@@ -45,8 +45,8 @@ internal object NetworkModule {
   @Provides
   @Singleton
   fun provideRetrofit(json: Json, okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-    .client(okHttpClient)
-    .baseUrl("https://pokeapi.co/api/v2/")
+  .client(okHttpClient)
+    .baseUrl("https://api.npoint.io/")
     .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
     .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
     .build()

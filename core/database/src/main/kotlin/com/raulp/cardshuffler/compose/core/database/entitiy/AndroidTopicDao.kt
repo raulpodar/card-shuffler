@@ -11,9 +11,9 @@ interface AndroidTopicDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   suspend fun insertAndroidTopics(pokemonList: List<AndroidTopicEntity>)
 
-  @Query("SELECT * FROM PokemonEntity WHERE page = :page_")
-  suspend fun getAndroidTopics(page_: Int): List<AndroidTopicEntity>
+  @Query("SELECT * FROM TopicEntity")
+  suspend fun getAndroidTopics(): List<AndroidTopicEntity>
 
-  @Query("SELECT * FROM PokemonEntity WHERE page <= :page_")
-  suspend fun getAllAndroidTopics(page_: Int): List<AndroidTopicEntity>
+  @Query("SELECT * FROM TopicEntity")
+  suspend fun getAllAndroidTopics(): List<AndroidTopicEntity>
 }

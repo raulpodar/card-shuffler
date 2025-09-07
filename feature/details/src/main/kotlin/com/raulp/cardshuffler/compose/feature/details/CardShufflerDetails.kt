@@ -49,7 +49,7 @@ import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerCi
 import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerText
 import com.raulp.cardshuffler.compose.core.designsystem.theme.CardShufflerTheme
 import com.raulp.cardshuffler.compose.core.designsystem.utils.getPokemonTypeColor
-import com.raulp.cardshuffler.compose.core.model.Pokemon
+import com.raulp.cardshuffler.compose.core.model.Topic
 import com.raulp.cardshuffler.compose.core.model.PokemonInfo
 import com.raulp.cardshuffler.compose.core.navigation.currentComposeNavigator
 import com.raulp.cardshuffler.compose.core.preview.CardShufflerPreviewTheme
@@ -63,7 +63,7 @@ fun SharedTransitionScope.CardShufflerDetails(
   detailsViewModel: DetailsViewModel = hiltViewModel(),
 ) {
   val uiState by detailsViewModel.uiState.collectAsStateWithLifecycle()
-  val pokemon by detailsViewModel.pokemon.collectAsStateWithLifecycle()
+  val pokemon by detailsViewModel.topic.collectAsStateWithLifecycle()
   val pokemonInfo by detailsViewModel.pokemonInfo.collectAsStateWithLifecycle()
 
   Column(
@@ -78,7 +78,7 @@ fun SharedTransitionScope.CardShufflerDetails(
 
     DetailsHeader(
       animatedVisibilityScope = animatedVisibilityScope,
-      pokemon = pokemon,
+      topic = pokemon,
       pokemonInfo = pokemonInfo,
       onPaletteLoaded = { palette = it },
       backgroundBrush = backgroundBrush
@@ -99,7 +99,7 @@ fun SharedTransitionScope.CardShufflerDetails(
 @Composable
 private fun SharedTransitionScope.DetailsHeader(
   animatedVisibilityScope: AnimatedVisibilityScope,
-  pokemon: Pokemon?,
+  topic: Topic?,
   pokemonInfo: PokemonInfo?,
   onPaletteLoaded: (Palette) -> Unit,
   backgroundBrush: Brush,
@@ -136,7 +136,7 @@ private fun SharedTransitionScope.DetailsHeader(
 
       Text(
         modifier = Modifier.padding(horizontal = 10.dp),
-        text = pokemon?.name.orEmpty(),
+        text = topic?.topicTitle.orEmpty(),
         color = CardShufflerTheme.colors.absoluteWhite,
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
