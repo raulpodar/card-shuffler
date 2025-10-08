@@ -22,7 +22,7 @@ class PokemonDaoTest : LocalDatabase() {
 
   @Before
   fun init() {
-    topicsDao = db.pokemonDao()
+    topicsDao = db.topicsDao()
   }
 
   @Test

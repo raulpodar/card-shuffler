@@ -2,7 +2,7 @@
 
 package com.raulp.cardshuffler.compose.core.network.di
 
-import com.raulp.cardshuffler.compose.core.network.service.CardShufflerClient
+import com.raulp.cardshuffler.compose.core.network.service.TopicsClient
 import com.raulp.cardshuffler.compose.core.network.service.CardShufflerService
 import com.raulp.cardshuffler.core.network.BuildConfig
 import com.skydoves.sandwich.retrofit.adapters.ApiResponseCallAdapterFactory
@@ -58,6 +58,6 @@ internal object NetworkModule {
 
   @Provides
   @Singleton
-  fun provideCardShufflerClient(CardShufflerService: CardShufflerService): CardShufflerClient =
-    CardShufflerClient(CardShufflerService)
+  fun provideCardShufflerClient(CardShufflerService: CardShufflerService): TopicsClient =
+    TopicsClient(CardShufflerService)
 }

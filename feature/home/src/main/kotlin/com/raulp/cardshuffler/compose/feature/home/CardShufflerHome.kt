@@ -47,7 +47,6 @@ import com.raulp.cardshuffler.compose.core.navigation.CardShufflerScreen
 import com.raulp.cardshuffler.compose.core.navigation.boundsTransform
 import com.raulp.cardshuffler.compose.core.navigation.currentComposeNavigator
 import com.raulp.cardshuffler.compose.core.preview.CardShufflerPreviewTheme
-import com.raulp.cardshuffler.compose.core.preview.PreviewUtils
 import com.raulp.cardshuffler.compose.designsystem.R
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.components.rememberImageComponent
@@ -204,17 +203,15 @@ private fun SharedTransitionScope.PokemonCard(
 //    }
 //  }
 //}
-
-@Preview
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun HomeContentPreview() {
-  CardShufflerPreviewTheme { scope ->
-    HomeContent(
-      animatedVisibilityScope = scope,
-      uiState = HomeUiState.Idle,
-      topicList = PreviewUtils.mockPokemonList().toImmutableList(),
-      fetchNextPokemonList = { HomeViewModel(homeRepository = FakeHomeRepository()) },
-    )
-  }
-}
+//
+//@Preview
+//@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+//@Composable
+//private fun HomeContentPreview() {
+//  CardShufflerPreviewTheme { scope ->
+//    HomeContent(
+//      animatedVisibilityScope = scope,
+//      uiState = HomeUiState.Idle
+//    )
+//  }
+//}

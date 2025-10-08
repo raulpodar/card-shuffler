@@ -3,7 +3,7 @@
 package com.raulp.cardshuffler.compose.core.test
 
 import com.raulp.cardshuffler.compose.core.model.Topic
-import com.raulp.cardshuffler.compose.core.model.PokemonInfo
+import com.raulp.cardshuffler.compose.core.model.FlashcardInfo
 
 object MockUtil {
 
@@ -15,7 +15,7 @@ object MockUtil {
 
   fun mockPokemonList() = listOf(mockPokemon())
 
-  fun mockPokemonInfo() = PokemonInfo(
+  fun mockPokemonInfo() = FlashcardInfo(
     id = 1,
     name = "bulbasaur",
     height = 7,

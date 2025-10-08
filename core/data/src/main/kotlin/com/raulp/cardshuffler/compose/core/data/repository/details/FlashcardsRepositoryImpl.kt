@@ -3,28 +3,27 @@
 package com.raulp.cardshuffler.compose.core.data.repository.details
 
 import androidx.annotation.VisibleForTesting
-import com.raulp.cardshuffler.compose.core.database.PokemonInfoDao
-import com.raulp.cardshuffler.compose.core.model.PokemonInfo
+import com.raulp.cardshuffler.compose.core.database.FlashcardInfoDao
+import com.raulp.cardshuffler.compose.core.model.FlashcardInfo
 import com.raulp.cardshuffler.compose.core.network.CardShufflerAppDispatchers
 import com.raulp.cardshuffler.compose.core.network.Dispatcher
-import com.raulp.cardshuffler.compose.core.network.service.CardShufflerClient
+import com.raulp.cardshuffler.compose.core.network.service.TopicsClient
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
 import javax.inject.Inject
 
 @VisibleForTesting
-class DetailsRepositoryImpl @Inject constructor(
-  private val CardShufflerClient: CardShufflerClient,
-  private val pokemonInfoDao: PokemonInfoDao,
+class FlashcardsRepositoryImpl @Inject constructor(
+  private val TopicsClient: TopicsClient,
+  private val flashcardInfoDao: FlashcardInfoDao,
   @Dispatcher(cardShufflerAppDispatchers = CardShufflerAppDispatchers.IO) private val ioDispatcher:
   CoroutineDispatcher,
-) : DetailsRepository {
+) : FlashcardsRepository {
 
-  //  @WorkerThread
+  //    @WorkerThread
 //  override fun fetchPokemonInfo(name: String, onComplete: () -> Unit, onError: (String?) -> Unit) =
 //    flow {
-//      val pokemonInfo = pokemonInfoDao.getPokemonInfo(name)
+//      val pokemonInfo = flashcardInfoDao.getPokemonInfo(name)
 //      if (pokemonInfo == null) {
 //        /**
 //         * fetches a [PokemonInfo] from the network and getting [ApiResponse] asynchronously.
@@ -32,7 +31,7 @@ class DetailsRepositoryImpl @Inject constructor(
 //         */
 //        val response = CardShufflerClient.fetchPokemonInfo(name = name)
 //        response.suspendOnSuccess {
-//          pokemonInfoDao.insertPokemonInfo(data.asEntity())
+//          flashcardInfoDao.insertPokemonInfo(data.asEntity())
 //          emit(data)
 //        }
 //          // handles the case when the API request gets an error response.
@@ -48,11 +47,18 @@ class DetailsRepositoryImpl @Inject constructor(
 //        emit(pokemonInfo.asDomain())
 //      }
 //    }.onCompletion { onComplete() }.flowOn(ioDispatcher)
+//  override fun fetchPokemonInfo(
+//    name: String,
+//    onComplete: () -> Unit,
+//    onError: (String?) -> Unit
+//  ): Flow<PokemonInfo> {
+//    return emptyFlow()
+//  }
   override fun fetchPokemonInfo(
     name: String,
     onComplete: () -> Unit,
     onError: (String?) -> Unit
-  ): Flow<PokemonInfo> {
-    return emptyFlow()
+  ): Flow<FlashcardInfo> {
+    TODO("Not yet implemented")
   }
 }

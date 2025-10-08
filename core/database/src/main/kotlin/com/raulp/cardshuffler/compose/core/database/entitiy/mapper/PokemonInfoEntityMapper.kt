@@ -2,34 +2,26 @@
 
 package com.raulp.cardshuffler.compose.core.database.entitiy.mapper
 
-import com.raulp.cardshuffler.compose.core.database.entitiy.PokemonInfoEntity
-import com.raulp.cardshuffler.compose.core.model.PokemonInfo
+import com.raulp.cardshuffler.compose.core.database.entitiy.FlashcardInfoEntity
+import com.raulp.cardshuffler.compose.core.model.FlashcardInfo
 
-object PokemonInfoEntityMapper : EntityMapper<PokemonInfo, PokemonInfoEntity> {
+object PokemonInfoEntityMapper : EntityMapper<FlashcardInfo, FlashcardInfoEntity> {
 
-  override fun asEntity(domain: PokemonInfo): PokemonInfoEntity = PokemonInfoEntity(
+  override fun asEntity(domain: FlashcardInfo): FlashcardInfoEntity = FlashcardInfoEntity(
     id = domain.id,
-    name = domain.name,
-    height = domain.height,
-    weight = domain.weight,
-    experience = domain.experience,
-    types = domain.types,
-    exp = domain.exp,
-    stats = domain.stats,
+    question = domain.question,
+    answer = domain.answer,
+    subjectId = domain.subjectId
   )
 
-  override fun asDomain(entity: PokemonInfoEntity): PokemonInfo = PokemonInfo(
+  override fun asDomain(entity: FlashcardInfoEntity): FlashcardInfo = FlashcardInfo(
     id = entity.id,
-    name = entity.name,
-    height = entity.height,
-    weight = entity.weight,
-    experience = entity.experience,
-    types = entity.types,
-    exp = entity.exp,
-    stats = entity.stats,
+    question = entity.question,
+    answer = entity.answer,
+    subjectId = entity.subjectId,
   )
 }
 
-fun PokemonInfo.asEntity(): PokemonInfoEntity = PokemonInfoEntityMapper.asEntity(this)
+fun FlashcardInfo.asEntity(): FlashcardInfoEntity = PokemonInfoEntityMapper.asEntity(this)
 
-fun PokemonInfoEntity.asDomain(): PokemonInfo = PokemonInfoEntityMapper.asDomain(this)
+fun FlashcardInfoEntity.asDomain(): FlashcardInfo = PokemonInfoEntityMapper.asDomain(this)

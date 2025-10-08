@@ -44,16 +44,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmpalette.palette.graphics.Palette
-import com.raulp.cardshuffler.compose.core.data.repository.details.FakeDetailsRepository
+import com.raulp.cardshuffler.compose.core.data.repository.details.FakeFlashcardsRepository
 import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerCircularProgress
 import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerText
 import com.raulp.cardshuffler.compose.core.designsystem.theme.CardShufflerTheme
 import com.raulp.cardshuffler.compose.core.designsystem.utils.getPokemonTypeColor
 import com.raulp.cardshuffler.compose.core.model.Topic
-import com.raulp.cardshuffler.compose.core.model.PokemonInfo
+import com.raulp.cardshuffler.compose.core.model.FlashcardInfo
 import com.raulp.cardshuffler.compose.core.navigation.currentComposeNavigator
 import com.raulp.cardshuffler.compose.core.preview.CardShufflerPreviewTheme
-import com.raulp.cardshuffler.compose.core.preview.PreviewUtils
 import com.raulp.cardshuffler.compose.designsystem.R
 import com.skydoves.landscapist.palette.rememberPaletteState
 
@@ -64,7 +63,7 @@ fun SharedTransitionScope.CardShufflerDetails(
 ) {
   val uiState by detailsViewModel.uiState.collectAsStateWithLifecycle()
   val pokemon by detailsViewModel.topic.collectAsStateWithLifecycle()
-  val pokemonInfo by detailsViewModel.pokemonInfo.collectAsStateWithLifecycle()
+  val pokemonInfo by detailsViewModel.flashcardInfo.collectAsStateWithLifecycle()
 
   Column(
     modifier = Modifier
@@ -79,15 +78,15 @@ fun SharedTransitionScope.CardShufflerDetails(
     DetailsHeader(
       animatedVisibilityScope = animatedVisibilityScope,
       topic = pokemon,
-      pokemonInfo = pokemonInfo,
+      flashcardInfo = pokemonInfo,
       onPaletteLoaded = { palette = it },
       backgroundBrush = backgroundBrush
     )
 
     if (uiState == DetailsUiState.Idle && pokemonInfo != null) {
-      DetailsInfo(pokemonInfo = pokemonInfo!!)
+      DetailsInfo(flashcardInfo = pokemonInfo!!)
 
-      DetailsStatus(pokemonInfo = pokemonInfo!!)
+      DetailsStatus(flashcardInfo = pokemonInfo!!)
     } else {
       Box(modifier = Modifier.fillMaxSize()) {
         CardShufflerCircularProgress()
@@ -100,7 +99,7 @@ fun SharedTransitionScope.CardShufflerDetails(
 private fun SharedTransitionScope.DetailsHeader(
   animatedVisibilityScope: AnimatedVisibilityScope,
   topic: Topic?,
-  pokemonInfo: PokemonInfo?,
+  flashcardInfo: FlashcardInfo?,
   onPaletteLoaded: (Palette) -> Unit,
   backgroundBrush: Brush,
 ) {
@@ -148,7 +147,7 @@ private fun SharedTransitionScope.DetailsHeader(
         .align(Alignment.TopEnd)
         .padding(12.dp)
         .statusBarsPadding(),
-      text = pokemonInfo?.getIdString().orEmpty(),
+      text = flashcardInfo?.getIdString().orEmpty(),
       previewText = "#001",
       color = CardShufflerTheme.colors.absoluteWhite,
       fontWeight = FontWeight.Bold,
@@ -169,29 +168,29 @@ private fun SharedTransitionScope.DetailsHeader(
 }
 
 @Composable
-private fun DetailsInfo(pokemonInfo: PokemonInfo) {
+private fun DetailsInfo(flashcardInfo: FlashcardInfo) {
   Row(
     modifier = Modifier
       .fillMaxWidth()
       .padding(top = 14.dp),
     horizontalArrangement = Arrangement.spacedBy(22.dp, Alignment.CenterHorizontally),
   ) {
-    pokemonInfo.types.forEach { typeInfo ->
-      Text(
-        modifier = Modifier
-          .background(
-            color = getPokemonTypeColor(type = typeInfo.type.name),
-            shape = RoundedCornerShape(64.dp),
-          )
-          .padding(horizontal = 40.dp, vertical = 4.dp),
-        text = typeInfo.type.name,
-        fontWeight = FontWeight.Bold,
-        textAlign = TextAlign.Center,
-        color = CardShufflerTheme.colors.absoluteWhite,
-        maxLines = 1,
-        fontSize = 16.sp,
-      )
-    }
+//    flashcardInfo.forEach { typeInfo ->
+//      Text(
+//        modifier = Modifier
+//          .background(
+//            color = getPokemonTypeColor(type = typeInfo.type.name),
+//            shape = RoundedCornerShape(64.dp),
+//          )
+//          .padding(horizontal = 40.dp, vertical = 4.dp),
+//        text = typeInfo.type.name,
+//        fontWeight = FontWeight.Bold,
+//        textAlign = TextAlign.Center,
+//        color = CardShufflerTheme.colors.absoluteWhite,
+//        maxLines = 1,
+//        fontSize = 16.sp,
+//      )
+//    }
   }
 
   Row(
@@ -201,12 +200,12 @@ private fun DetailsInfo(pokemonInfo: PokemonInfo) {
     horizontalArrangement = Arrangement.SpaceEvenly,
   ) {
     PokemonInfoItem(
-      title = pokemonInfo.getWeightString(),
+      title = flashcardInfo.answer,
       content = stringResource(id = R.string.weight),
     )
 
     PokemonInfoItem(
-      title = pokemonInfo.getHeightString(),
+      title = flashcardInfo.question,
       content = stringResource(id = R.string.height),
     )
   }
@@ -268,7 +267,7 @@ fun FlashcardProficiencyIndicatorPreviewReview() {
 
 @Composable
 private fun DetailsStatus(
-  pokemonInfo: PokemonInfo,
+  flashcardInfo: FlashcardInfo,
 ) {
   Text(
     modifier = Modifier
@@ -281,14 +280,14 @@ private fun DetailsStatus(
     fontSize = 21.sp,
   )
 
-  Column {
-    pokemonInfo.toCardShufflerStatusList().forEach { pokemonStatus ->
-      PokemonStatusItem(
-        modifier = Modifier.padding(bottom = 12.dp),
-        CardShufflerStatus = pokemonStatus,
-      )
-    }
-  }
+//  Column {
+//    flashcardInfo.toCardShufflerStatusList().forEach { pokemonStatus ->
+//      PokemonStatusItem(
+//        modifier = Modifier.padding(bottom = 12.dp),
+//        CardShufflerStatus = pokemonStatus,
+//      )
+//    }
+//  }
 //  Flashcard(
 //    question = "What is the capital of France?",
 //    answer = "Paris",
@@ -310,38 +309,38 @@ private fun DetailsStatus(
 }
 
 
-
-@Preview
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun CardShufflerDetailsPreview() {
-  CardShufflerPreviewTheme {
-    CardShufflerDetails(
-      animatedVisibilityScope = it,
-      detailsViewModel = DetailsViewModel(
-        detailsRepository = FakeDetailsRepository(),
-        savedStateHandle = SavedStateHandle(),
-      ),
-    )
-  }
-}
-
-@Preview
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun CardShufflerDetailsInfoPreview() {
-  CardShufflerPreviewTheme {
-    DetailsInfo(pokemonInfo = PreviewUtils.mockPokemonInfo())
-  }
-}
-
-@Preview
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun CardShufflerDetailsStatusPreview() {
-  CardShufflerPreviewTheme {
-    DetailsStatus(
-      pokemonInfo = PreviewUtils.mockPokemonInfo(),
-    )
-  }
-}
+//
+//@Preview
+//@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+//@Composable
+//private fun CardShufflerDetailsPreview() {
+//  CardShufflerPreviewTheme {
+//    CardShufflerDetails(
+//      animatedVisibilityScope = it,
+//      detailsViewModel = DetailsViewModel(
+//        flashcardsRepository = FakeFlashcardsRepository(),
+//        savedStateHandle = SavedStateHandle(),
+//      ),
+//    )
+//  }
+//}
+//
+//@Preview
+//@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+//@Composable
+//private fun CardShufflerDetailsInfoPreview() {
+//  CardShufflerPreviewTheme {
+//    DetailsInfo(flashcardInfo = PreviewUtils.mockPokemonInfo())
+//  }
+//}
+//
+//@Preview
+//@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+//@Composable
+//private fun CardShufflerDetailsStatusPreview() {
+//  CardShufflerPreviewTheme {
+//    DetailsStatus(
+//      flashcardInfo = PreviewUtils.mockPokemonInfo(),
+//    )
+//  }
+//}

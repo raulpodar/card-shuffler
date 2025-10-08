@@ -3,10 +3,10 @@
 package com.raulp.cardshuffler.compose.core.data
 
 import app.cash.turbine.test
-import com.raulp.cardshuffler.compose.core.data.repository.details.DetailsRepositoryImpl
-import com.raulp.cardshuffler.compose.core.database.PokemonInfoDao
+import com.raulp.cardshuffler.compose.core.data.repository.details.FlashcardsRepositoryImpl
+import com.raulp.cardshuffler.compose.core.database.FlashcardInfoDao
 import com.raulp.cardshuffler.compose.core.database.entitiy.mapper.asEntity
-import com.raulp.cardshuffler.compose.core.network.service.CardShufflerClient
+import com.raulp.cardshuffler.compose.core.network.service.TopicsClient
 import com.raulp.cardshuffler.compose.core.network.service.CardShufflerService
 import com.raulp.cardshuffler.compose.core.test.MainCoroutinesRule
 import com.raulp.cardshuffler.compose.core.test.MockUtil.mockPokemonInfo
@@ -28,24 +28,24 @@ import kotlin.time.toDuration
 
 class DetailsRepositoryTest {
 
-  private lateinit var repository: DetailsRepositoryImpl
-  private lateinit var client: CardShufflerClient
+  private lateinit var repository: FlashcardsRepositoryImpl
+  private lateinit var client: TopicsClient
   private val service: CardShufflerService = mock()
-  private val pokemonInfoDao: PokemonInfoDao = mock()
+  private val flashcardInfoDao: FlashcardInfoDao = mock()
 
   @get:Rule
   val coroutinesRule = MainCoroutinesRule()
 
   @Before
   fun setup() {
-    client = CardShufflerClient(service)
-    repository = DetailsRepositoryImpl(client, pokemonInfoDao, coroutinesRule.testDispatcher)
+    client = TopicsClient(service)
+    repository = FlashcardsRepositoryImpl(client, flashcardInfoDao, coroutinesRule.testDispatcher)
   }
 
   @Test
   fun fetchPokemonInfoFromNetworkTest() = runTest {
     val mockData = mockPokemonInfo()
-    whenever(pokemonInfoDao.getPokemonInfo(name_ = "bulbasaur")).thenReturn(null)
+    whenever(flashcardInfoDao.getPokemonInfo(name_ = "bulbasaur")).thenReturn(null)
     whenever(service.fetchPokemonInfo(name = "bulbasaur")).thenReturn(
       ApiResponse.responseOf {
         Response.success(
@@ -62,16 +62,16 @@ class DetailsRepositoryTest {
       awaitComplete()
     }
 
-    verify(pokemonInfoDao, atLeastOnce()).getPokemonInfo(name_ = "bulbasaur")
+    verify(flashcardInfoDao, atLeastOnce()).getPokemonInfo(name_ = "bulbasaur")
     verify(service, atLeastOnce()).fetchPokemonInfo(name = "bulbasaur")
-    verify(pokemonInfoDao, atLeastOnce()).insertPokemonInfo(mockData.asEntity())
+    verify(flashcardInfoDao, atLeastOnce()).insertPokemonInfo(mockData.asEntity())
     verifyNoMoreInteractions(service)
   }
 
   @Test
   fun fetchPokemonInfoFromDatabaseTest() = runTest {
     val mockData = mockPokemonInfo()
-    whenever(pokemonInfoDao.getPokemonInfo(name_ = "bulbasaur")).thenReturn(mockData.asEntity())
+    whenever(flashcardInfoDao.getPokemonInfo(name_ = "bulbasaur")).thenReturn(mockData.asEntity())
     whenever(service.fetchPokemonInfo(name = "bulbasaur")).thenReturn(
       ApiResponse.responseOf {
         Response.success(
@@ -92,7 +92,7 @@ class DetailsRepositoryTest {
       awaitComplete()
     }
 
-    verify(pokemonInfoDao, atLeastOnce()).getPokemonInfo(name_ = "bulbasaur")
+    verify(flashcardInfoDao, atLeastOnce()).getPokemonInfo(name_ = "bulbasaur")
     verifyNoMoreInteractions(service)
   }
 }
