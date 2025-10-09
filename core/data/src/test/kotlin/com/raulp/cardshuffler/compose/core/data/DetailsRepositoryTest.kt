@@ -45,7 +45,7 @@ class DetailsRepositoryTest {
   @Test
   fun fetchPokemonInfoFromNetworkTest() = runTest {
     val mockData = mockPokemonInfo()
-    whenever(flashcardInfoDao.getPokemonInfo(name_ = "bulbasaur")).thenReturn(null)
+    whenever(flashcardInfoDao.getAllFlashcards(name_ = "bulbasaur")).thenReturn(null)
     whenever(service.fetchPokemonInfo(name = "bulbasaur")).thenReturn(
       ApiResponse.responseOf {
         Response.success(
@@ -62,16 +62,16 @@ class DetailsRepositoryTest {
       awaitComplete()
     }
 
-    verify(flashcardInfoDao, atLeastOnce()).getPokemonInfo(name_ = "bulbasaur")
+    verify(flashcardInfoDao, atLeastOnce()).getAllFlashcards(name_ = "bulbasaur")
     verify(service, atLeastOnce()).fetchPokemonInfo(name = "bulbasaur")
-    verify(flashcardInfoDao, atLeastOnce()).insertPokemonInfo(mockData.asEntity())
+    verify(flashcardInfoDao, atLeastOnce()).insertFlashcard(mockData.asEntity())
     verifyNoMoreInteractions(service)
   }
 
   @Test
   fun fetchPokemonInfoFromDatabaseTest() = runTest {
     val mockData = mockPokemonInfo()
-    whenever(flashcardInfoDao.getPokemonInfo(name_ = "bulbasaur")).thenReturn(mockData.asEntity())
+    whenever(flashcardInfoDao.getAllFlashcards(name_ = "bulbasaur")).thenReturn(mockData.asEntity())
     whenever(service.fetchPokemonInfo(name = "bulbasaur")).thenReturn(
       ApiResponse.responseOf {
         Response.success(
@@ -92,7 +92,7 @@ class DetailsRepositoryTest {
       awaitComplete()
     }
 
-    verify(flashcardInfoDao, atLeastOnce()).getPokemonInfo(name_ = "bulbasaur")
+    verify(flashcardInfoDao, atLeastOnce()).getAllFlashcards(name_ = "bulbasaur")
     verifyNoMoreInteractions(service)
   }
 }

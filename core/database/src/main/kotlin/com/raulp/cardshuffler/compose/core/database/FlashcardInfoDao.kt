@@ -10,8 +10,11 @@ import com.raulp.cardshuffler.compose.core.database.entitiy.FlashcardInfoEntity
 interface FlashcardInfoDao {
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  suspend fun insertPokemonInfo(pokemonInfo: FlashcardInfoEntity)
+  suspend fun insertFlashcard(flashcardInfoEntity: FlashcardInfoEntity)
+
+  @Insert
+  suspend fun insertFlashcardsList(flashcardInfoEntityList: List<FlashcardInfoEntity>)
 
   @Query("SELECT * FROM FlashcardInfoEntity")
-  suspend fun getPokemonInfo(): FlashcardInfoEntity?
+  suspend fun getAllFlashcards(): FlashcardInfoEntity?
 }

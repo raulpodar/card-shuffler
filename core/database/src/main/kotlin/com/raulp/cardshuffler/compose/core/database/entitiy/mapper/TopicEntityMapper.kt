@@ -23,4 +23,4 @@ object TopicEntityMapper : EntityMapper<List<Topic>, List<TopicEntity>> {
 }
 
 fun List<Topic>.asEntity(): List<TopicEntity> = TopicEntityMapper.asEntity(this)
-fun List<TopicEntity>?.asDomain(): List<Topic> = TopicEntityMapper.asDomain(this.orEmpty())
+fun List<TopicEntity>?. asDomain(): List<Topic> = TopicEntityMapper.asDomain(this.orEmpty())

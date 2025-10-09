@@ -5,7 +5,7 @@ package com.raulp.cardshuffler.compose.core.database.entitiy.mapper
 import com.raulp.cardshuffler.compose.core.database.entitiy.FlashcardInfoEntity
 import com.raulp.cardshuffler.compose.core.model.FlashcardInfo
 
-object PokemonInfoEntityMapper : EntityMapper<FlashcardInfo, FlashcardInfoEntity> {
+object FlashcardInfoEntityMapper : EntityMapper<FlashcardInfo, FlashcardInfoEntity> {
 
   override fun asEntity(domain: FlashcardInfo): FlashcardInfoEntity = FlashcardInfoEntity(
     id = domain.id,
@@ -22,6 +22,6 @@ object PokemonInfoEntityMapper : EntityMapper<FlashcardInfo, FlashcardInfoEntity
   )
 }
 
-fun FlashcardInfo.asEntity(): FlashcardInfoEntity = PokemonInfoEntityMapper.asEntity(this)
+fun FlashcardInfo.asEntity(): FlashcardInfoEntity = FlashcardInfoEntityMapper.asEntity(this)
 
-fun FlashcardInfoEntity.asDomain(): FlashcardInfo = PokemonInfoEntityMapper.asDomain(this)
+fun FlashcardInfoEntity.asDomain(): FlashcardInfo = FlashcardInfoEntityMapper.asDomain(this)

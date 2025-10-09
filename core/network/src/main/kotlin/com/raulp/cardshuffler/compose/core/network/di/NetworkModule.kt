@@ -4,6 +4,8 @@ package com.raulp.cardshuffler.compose.core.network.di
 
 import com.raulp.cardshuffler.compose.core.network.service.TopicsClient
 import com.raulp.cardshuffler.compose.core.network.service.CardShufflerService
+import com.raulp.cardshuffler.compose.core.network.service.FlashcardsClient
+import com.raulp.cardshuffler.compose.core.network.service.FlashcardsService
 import com.raulp.cardshuffler.core.network.BuildConfig
 import com.skydoves.sandwich.retrofit.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
@@ -60,4 +62,14 @@ internal object NetworkModule {
   @Singleton
   fun provideCardShufflerClient(CardShufflerService: CardShufflerService): TopicsClient =
     TopicsClient(CardShufflerService)
+
+  @Provides
+  @Singleton
+  fun provideFlashcardsService(retrofit: Retrofit): FlashcardsService =
+    retrofit.create(FlashcardsService::class.java)
+
+  @Provides
+  @Singleton
+  fun provideFlashcardsClient(flashcardsService: FlashcardsService): FlashcardsClient =
+    FlashcardsClient(flashcardsService)
 }

@@ -1,6 +1,5 @@
 package com.raulp.cardshuffler.compose.feature.details
 
-import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
