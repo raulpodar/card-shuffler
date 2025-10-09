@@ -2,16 +2,15 @@
 
 package com.raulp.cardshuffler.compose.core.data.repository.home
 
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.WorkerThread
-import com.raulp.cardshuffler.compose.core.database.PokemonDao
+import com.raulp.cardshuffler.compose.core.database.TopicsDao
+import com.raulp.cardshuffler.compose.core.database.entitiy.TopicEntity
 import com.raulp.cardshuffler.compose.core.database.entitiy.mapper.asDomain
-import com.raulp.cardshuffler.compose.core.database.entitiy.mapper.asEntity
-import com.raulp.cardshuffler.compose.core.model.Pokemon
 import com.raulp.cardshuffler.compose.core.network.CardShufflerAppDispatchers
 import com.raulp.cardshuffler.compose.core.network.Dispatcher
-import com.raulp.cardshuffler.compose.core.network.service.CardShufflerClient
-import com.skydoves.sandwich.ApiResponse
+import com.raulp.cardshuffler.compose.core.network.service.TopicsClient
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.suspendOnSuccess
@@ -24,37 +23,35 @@ import javax.inject.Inject
 
 @VisibleForTesting
 class HomeRepositoryImpl @Inject constructor(
-  private val CardShufflerClient: CardShufflerClient,
-  private val pokemonDao: PokemonDao,
+  private val TopicsClient: TopicsClient,
+  private val topicsDao: TopicsDao,
   @Dispatcher(cardShufflerAppDispatchers = CardShufflerAppDispatchers.IO) private val ioDispatcher:
   CoroutineDispatcher,
 ) : HomeRepository {
 
   @WorkerThread
-  override fun fetchPokemonList(
+  override fun fetchTopicList(
     page: Int,
     onStart: () -> Unit,
     onComplete: () -> Unit,
     onError: (String?) -> Unit,
   ) = flow {
-    var pokemons = pokemonDao.getPokemonList(page).asDomain()
-    if (pokemons.isEmpty()) {
-      /**
-       * fetches a list of [Pokemon] from the network and getting [ApiResponse] asynchronously.
-       * @see [suspendOnSuccess](https://github.com/skydoves/sandwich#apiresponse-extensions-for-coroutines)
-       */
-      val response = CardShufflerClient.fetchPokemonList(page = page)
+    var topics = topicsDao.getAllTopicsList().asDomain()
+    Log.d("HomeRepositoryImpl", "Topics: $topics")
+    if (topics.isEmpty()) {
+      val response = TopicsClient.fetchTopicList()
+      Log.d("HomeRepositoryImpl", "Topics: $response")
       response.suspendOnSuccess {
-        pokemons = data.results
-        pokemons.forEach { pokemon -> pokemon.page = page }
-        pokemonDao.insertPokemonList(pokemons.asEntity())
-        emit(pokemonDao.getAllPokemonList(page).asDomain())
+        val topics = data.subjects
+        val topicsEntity = topics.map { TopicEntity(it.id, it.image.orEmpty(), it.title.orEmpty()) }
+        topicsDao.insertTopicsList(topicsEntity)
+        Log.d("HomeRepositoryImpl", "Topics: $topicsEntity")
+        emit(topicsDao.getAllTopicsList().asDomain())
       }.onFailure {
-        // handles the all error cases from the API request fails.
         onError(message())
       }
     } else {
-      emit(pokemonDao.getAllPokemonList(page).asDomain())
+      emit(topicsDao.getAllTopicsList().asDomain())
     }
   }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(ioDispatcher)
 }

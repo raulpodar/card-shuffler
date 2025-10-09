@@ -2,8 +2,8 @@
 
 package com.raulp.cardshuffler.compose.core.data.di
 
-import com.raulp.cardshuffler.compose.core.data.repository.details.DetailsRepository
-import com.raulp.cardshuffler.compose.core.data.repository.details.DetailsRepositoryImpl
+import com.raulp.cardshuffler.compose.core.data.repository.details.FlashcardsRepository
+import com.raulp.cardshuffler.compose.core.data.repository.details.FlashcardsRepositoryImpl
 import com.raulp.cardshuffler.compose.core.data.repository.home.HomeRepository
 import com.raulp.cardshuffler.compose.core.data.repository.home.HomeRepositoryImpl
 import dagger.Binds
@@ -19,5 +19,5 @@ internal interface DataModule {
   fun bindsMainRepository(homeRepositoryImpl: HomeRepositoryImpl): HomeRepository
 
   @Binds
-  fun bindsDetailRepository(detailsRepositoryImpl: DetailsRepositoryImpl): DetailsRepository
+  fun bindsDetailRepository(detailsRepositoryImpl: FlashcardsRepositoryImpl): FlashcardsRepository
 }

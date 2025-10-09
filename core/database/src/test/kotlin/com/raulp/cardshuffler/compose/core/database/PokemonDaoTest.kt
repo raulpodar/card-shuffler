@@ -18,19 +18,19 @@ import org.robolectric.annotation.Config
 @Config(sdk = [23])
 class PokemonDaoTest : LocalDatabase() {
 
-  private lateinit var pokemonDao: PokemonDao
+  private lateinit var topicsDao: TopicsDao
 
   @Before
   fun init() {
-    pokemonDao = db.pokemonDao()
+    topicsDao = db.topicsDao()
   }
 
   @Test
   fun insertAndLoadPokemonListTest() = runBlocking {
     val mockDataList = mockPokemonList().asEntity()
-    pokemonDao.insertPokemonList(mockDataList)
+    topicsDao.insertTopicsList(mockDataList)
 
-    val loadFromDB = pokemonDao.getPokemonList(page_ = 0)
+    val loadFromDB = topicsDao.getTopicsList()
     assertThat(loadFromDB.toString(), `is`(mockDataList.toString()))
 
     val mockData = listOf(mockPokemon()).asEntity()[0]

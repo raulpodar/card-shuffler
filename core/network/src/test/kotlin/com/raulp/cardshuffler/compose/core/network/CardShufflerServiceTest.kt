@@ -24,12 +24,12 @@ class CardShufflerServiceTest : ApiAbstract<CardShufflerService>() {
 
   @Throws(IOException::class)
   @Test
-  fun fetchPokemonListFromNetworkTest() = runTest {
+  fun fetchTopicsFromNetworkTest() = runTest {
     enqueueResponse("/PokemonResponse.json")
-    val response = service.fetchPokemonList()
+    val response = service.fetchTopics()
     val responseBody = requireNotNull((response as ApiResponse.Success).data)
 
-    assertThat(responseBody.count, `is`(964))
+    assertThat(responseBody.id, `is`(964))
     assertThat(responseBody.results[0].name, `is`("bulbasaur"))
     assertThat(responseBody.results[0].url, `is`("https://pokeapi.co/api/v2/pokemon/1/"))
   }

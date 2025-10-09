@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerProgressBar
@@ -42,4 +43,15 @@ internal fun PokemonStatusItem(
       label = CardShufflerStatus.label,
     )
   }
+}
+
+@Preview
+@Composable
+private fun PokemonStatusItemPreview() {
+    PokemonStatusItem(
+        CardShufflerStatus = CardShufflerStatus(
+            type = "HP",
+            progress = 0.5f,
+            color = CardShufflerTheme.colors.blue,
+            label = "100"))
 }

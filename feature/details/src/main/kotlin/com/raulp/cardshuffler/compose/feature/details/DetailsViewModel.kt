@@ -3,9 +3,9 @@ package com.raulp.cardshuffler.compose.feature.details
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.raulp.cardshuffler.compose.core.data.repository.details.DetailsRepository
-import com.raulp.cardshuffler.compose.core.model.Pokemon
-import com.raulp.cardshuffler.compose.core.model.PokemonInfo
+import com.raulp.cardshuffler.compose.core.data.repository.details.FlashcardsRepository
+import com.raulp.cardshuffler.compose.core.model.Topic
+import com.raulp.cardshuffler.compose.core.model.FlashcardInfo
 import com.raulp.cardshuffler.compose.core.viewmodel.BaseViewModel
 import com.raulp.cardshuffler.compose.core.viewmodel.ViewModelStateFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,18 +18,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-  detailsRepository: DetailsRepository,
+  flashcardsRepository: FlashcardsRepository,
   savedStateHandle: SavedStateHandle,
 ) : BaseViewModel() {
 
   internal val uiState: ViewModelStateFlow<DetailsUiState> =
     viewModelStateFlow(DetailsUiState.Loading)
 
-  val pokemon = savedStateHandle.getStateFlow<Pokemon?>("pokemon", null)
-  val pokemonInfo: StateFlow<PokemonInfo?> =
-    pokemon.filterNotNull().flatMapLatest { pokemon ->
-      detailsRepository.fetchPokemonInfo(
-        name = pokemon.nameField.replaceFirstChar { it.lowercase() },
+  val topic = savedStateHandle.getStateFlow<Topic?>("pokemon", null)
+  val flashcardInfo: StateFlow<FlashcardInfo?> =
+    topic.filterNotNull().flatMapLatest { pokemon ->
+      flashcardsRepository.fetchPokemonInfo(
+        name = pokemon.topicTitle.replaceFirstChar { it.lowercase() },
         onComplete = { uiState.tryEmit(key, DetailsUiState.Idle) },
         onError = { uiState.tryEmit(key, DetailsUiState.Error(it)) },
       )

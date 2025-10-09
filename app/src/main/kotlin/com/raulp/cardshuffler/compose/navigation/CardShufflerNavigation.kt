@@ -3,6 +3,8 @@
 package com.raulp.cardshuffler.compose.navigation
 
 import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.raulp.cardshuffler.compose.core.navigation.CardShufflerScreen
@@ -20,4 +22,22 @@ fun NavGraphBuilder.cardShufflerNavigation() {
   ) {
     CardShufflerDetails(this)
   }
+
+  composable<CardShufflerScreen.CardList> {
+    CardListScreen()
+  }
+
+  composable<CardShufflerScreen.SettingsScreen> {
+    SettingsScreen()
+  }
+}
+
+@Composable
+fun CardListScreen() {
+  Text(text = "Card List Screen")
+}
+
+@Composable
+fun SettingsScreen() {
+  Text(text = "Settings Screen")
 }

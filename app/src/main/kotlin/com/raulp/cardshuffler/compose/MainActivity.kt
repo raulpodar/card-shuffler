@@ -31,5 +31,24 @@ class MainActivity : ComponentActivity() {
         CardShufflerMain(composeNavigator = composeNavigator)
       }
     }
+
+//    setContent {
+//      MaterialTheme { // Or your app's theme
+//        Surface(modifier = Modifier.fillMaxSize()) {
+//          Column(
+//            modifier = Modifier.fillMaxSize(),
+//            horizontalAlignment = Alignment.CenterHorizontally,
+//            verticalArrangement = Arrangement.Center
+//          ) {
+//            Flashcard(
+//              question = "What is the capital of France?",
+//              answer = "Paris",
+//              onKnewThis = { /* ... */ },
+//              onNeedToPractice = { /* ... */ }
+//            )
+//          }
+//        }
+//      }
+//    }
   }
 }

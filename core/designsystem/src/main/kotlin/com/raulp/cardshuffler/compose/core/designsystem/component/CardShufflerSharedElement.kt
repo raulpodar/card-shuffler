@@ -29,7 +29,7 @@ fun Modifier.cardShufflerSharedElement(
   this
 } else {
   this.sharedElement(
-    state = state,
+    sharedContentState = state,
     animatedVisibilityScope = animatedVisibilityScope,
     boundsTransform = boundsTransform,
     placeHolderSize = placeHolderSize,
