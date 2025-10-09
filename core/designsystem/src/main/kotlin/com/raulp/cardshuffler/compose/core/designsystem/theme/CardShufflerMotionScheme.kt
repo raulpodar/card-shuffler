@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.designsystem.theme
 
 import androidx.compose.animation.core.FiniteAnimationSpec
@@ -6,7 +8,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MotionScheme
 import com.raulp.cardshuffler.compose.core.designsystem.animation.FancyTransitionEasing
-
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 internal val CardShufflerMotionScheme: MotionScheme = object : MotionScheme {
@@ -26,37 +27,37 @@ internal val CardShufflerMotionScheme: MotionScheme = object : MotionScheme {
   private val defaultSpatialSpec =
     tween<Any>(
       durationMillis = 400,
-      easing = FancyTransitionEasing
+      easing = FancyTransitionEasing,
     )
 
   private val fastSpatialSpec =
     spring<Any>(
       dampingRatio = SpringFastSpatialDamping,
-      stiffness = SpringFastSpatialStiffness
+      stiffness = SpringFastSpatialStiffness,
     )
 
   private val slowSpatialSpec =
     spring<Any>(
       dampingRatio = SpringSlowSpatialDamping,
-      stiffness = SpringSlowSpatialStiffness
+      stiffness = SpringSlowSpatialStiffness,
     )
 
   private val defaultEffectsSpec =
     spring<Any>(
       dampingRatio = SpringDefaultEffectsDamping,
-      stiffness = SpringDefaultEffectsStiffness
+      stiffness = SpringDefaultEffectsStiffness,
     )
 
   private val fastEffectsSpec =
     tween<Any>(
       durationMillis = 300,
-      easing = FancyTransitionEasing
+      easing = FancyTransitionEasing,
     )
 
   private val slowEffectsSpec =
     tween<Any>(
       durationMillis = 500,
-      easing = FancyTransitionEasing
+      easing = FancyTransitionEasing,
     )
 
   override fun <T> defaultSpatialSpec(): FiniteAnimationSpec<T> = defaultSpatialSpec.cast()
@@ -71,7 +72,6 @@ internal val CardShufflerMotionScheme: MotionScheme = object : MotionScheme {
 
   override fun <T> slowEffectsSpec(): FiniteAnimationSpec<T> = slowEffectsSpec.cast()
 }
-
 
 inline fun <reified T, reified R> T.cast(): R = this as R
 

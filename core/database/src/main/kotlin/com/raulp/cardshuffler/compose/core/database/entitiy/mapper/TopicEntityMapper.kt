@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.database.entitiy.mapper
 
 import com.raulp.cardshuffler.compose.core.database.entitiy.TopicEntity
@@ -9,7 +11,7 @@ object TopicEntityMapper : EntityMapper<List<Topic>, List<TopicEntity>> {
     TopicEntity(
       id = topic.id,
       url = topic.url,
-      title = topic.title
+      title = topic.title,
     )
   }
 
@@ -17,10 +19,10 @@ object TopicEntityMapper : EntityMapper<List<Topic>, List<TopicEntity>> {
     Topic(
       id = topicEntity.id,
       url = topicEntity.url,
-      title = topicEntity.title
+      title = topicEntity.title,
     )
   }
 }
 
 fun List<Topic>.asEntity(): List<TopicEntity> = TopicEntityMapper.asEntity(this)
-fun List<TopicEntity>?. asDomain(): List<Topic> = TopicEntityMapper.asDomain(this.orEmpty())
+fun List<TopicEntity>?.asDomain(): List<Topic> = TopicEntityMapper.asDomain(this.orEmpty())

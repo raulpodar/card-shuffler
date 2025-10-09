@@ -2,10 +2,10 @@
 
 package com.raulp.cardshuffler.compose.core.network.di
 
-import com.raulp.cardshuffler.compose.core.network.service.TopicsClient
 import com.raulp.cardshuffler.compose.core.network.service.CardShufflerService
 import com.raulp.cardshuffler.compose.core.network.service.FlashcardsClient
 import com.raulp.cardshuffler.compose.core.network.service.FlashcardsService
+import com.raulp.cardshuffler.compose.core.network.service.TopicsClient
 import com.raulp.cardshuffler.core.network.BuildConfig
 import com.skydoves.sandwich.retrofit.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
@@ -47,7 +47,7 @@ internal object NetworkModule {
   @Provides
   @Singleton
   fun provideRetrofit(json: Json, okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-  .client(okHttpClient)
+    .client(okHttpClient)
     .baseUrl("https://api.npoint.io/")
     .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
     .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())

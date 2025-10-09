@@ -20,5 +20,6 @@ data class Topic(
 
   val imageUrl: String
     inline get() {
-      return url}
+      return url
+    }
 }

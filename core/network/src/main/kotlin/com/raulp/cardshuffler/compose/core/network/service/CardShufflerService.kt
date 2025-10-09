@@ -9,6 +9,5 @@ import retrofit2.http.GET
 interface CardShufflerService {
 
   @GET("f41def82cff93da2b936")
-  suspend fun fetchTopics(
-  ): ApiResponse<SubjectsResponse>
+  suspend fun fetchTopics(): ApiResponse<SubjectsResponse>
 }

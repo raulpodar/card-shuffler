@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.network.model
 
 import kotlinx.serialization.SerialName
@@ -11,6 +13,4 @@ data class TopicResponse(
 )
 
 @Serializable
-data class SubjectsResponse(
-  val subjects: List<TopicResponse>
-)
+data class SubjectsResponse(val subjects: List<TopicResponse>)

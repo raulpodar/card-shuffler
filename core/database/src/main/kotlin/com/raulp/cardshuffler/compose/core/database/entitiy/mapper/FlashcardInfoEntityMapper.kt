@@ -11,7 +11,7 @@ object FlashcardInfoEntityMapper : EntityMapper<FlashcardInfo, FlashcardInfoEnti
     id = domain.id,
     question = domain.question,
     answer = domain.answer,
-    subjectId = domain.subjectId
+    subjectId = domain.subjectId,
   )
 
   override fun asDomain(entity: FlashcardInfoEntity): FlashcardInfo = FlashcardInfo(

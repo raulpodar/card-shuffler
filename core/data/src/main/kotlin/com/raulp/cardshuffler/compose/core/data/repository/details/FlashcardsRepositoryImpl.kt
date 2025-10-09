@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.data.repository.details
 
 import androidx.annotation.VisibleForTesting
@@ -31,7 +33,7 @@ class FlashcardsRepositoryImpl @Inject constructor(
   override fun fetchPokemonInfo(
     name: String,
     onComplete: () -> Unit,
-    onError: (String?) -> Unit
+    onError: (String?) -> Unit,
   ): Flow<FlashcardInfo> = flow {
     val cachedFlashcard = flashcardInfoDao.getAllFlashcards()?.asDomain()
     if (cachedFlashcard != null) {
@@ -45,10 +47,9 @@ class FlashcardsRepositoryImpl @Inject constructor(
           id = it.id.toInt(),
           subjectId = it.subjectId,
           answer = it.answer,
-          question = it.question
+          question = it.question,
         )
       }
-
 
       flashcardInfoDao.insertFlashcardsList(flashcardsEntity)
 

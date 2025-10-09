@@ -6,8 +6,8 @@ import app.cash.turbine.test
 import com.raulp.cardshuffler.compose.core.data.repository.details.FlashcardsRepositoryImpl
 import com.raulp.cardshuffler.compose.core.database.FlashcardInfoDao
 import com.raulp.cardshuffler.compose.core.database.entitiy.mapper.asEntity
-import com.raulp.cardshuffler.compose.core.network.service.TopicsClient
 import com.raulp.cardshuffler.compose.core.network.service.CardShufflerService
+import com.raulp.cardshuffler.compose.core.network.service.TopicsClient
 import com.raulp.cardshuffler.compose.core.test.MainCoroutinesRule
 import com.raulp.cardshuffler.compose.core.test.MockUtil.mockPokemonInfo
 import com.skydoves.sandwich.ApiResponse

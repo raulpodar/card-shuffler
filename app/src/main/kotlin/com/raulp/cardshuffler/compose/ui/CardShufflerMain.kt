@@ -26,56 +26,52 @@ import com.raulp.cardshuffler.compose.core.navigation.CardShufflerScreen
 import com.raulp.cardshuffler.compose.navigation.CardShufflerNavHost
 
 // Data class for navigation items
-data class NavItem(
-    val screen: CardShufflerScreen,
-    val label: String,
-    val icon: ImageVector
-)
+data class NavItem(val screen: CardShufflerScreen, val label: String, val icon: ImageVector)
 
 @Composable
 fun CardShufflerMain(composeNavigator: AppComposeNavigator<CardShufflerScreen>) {
-    CardShufflerTheme {
-        val navHostController = rememberNavController()
+  CardShufflerTheme {
+    val navHostController = rememberNavController()
 
-        LaunchedEffect(Unit) {
-            composeNavigator.handleNavigationCommands(navHostController)
-        }
-
-        val navigationItems = listOf(
-            NavItem(CardShufflerScreen.Home, "Home", Icons.Filled.Home),
-            NavItem(CardShufflerScreen.CardList, "CardList", Icons.AutoMirrored.Filled.List), // Changed line
-            NavItem(CardShufflerScreen.SettingsScreen, "Settings", Icons.Filled.Settings)
-        )
-
-        Scaffold(
-            bottomBar = {
-                NavigationBar {
-                    val navBackStackEntry by navHostController.currentBackStackEntryAsState()
-                    val currentDestination = navBackStackEntry?.destination
-
-                    navigationItems.forEach { item ->
-                        NavigationBarItem(
-                            selected = currentDestination?.route == item.screen::class.qualifiedName,
-                            onClick = {
-                                navHostController.navigate(item.screen) {
-                                    popUpTo(navHostController.graph.findStartDestination().id) {
-                                        saveState = true
-                                    }
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
-                            },
-                            icon = { Icon(item.icon, contentDescription = item.label) },
-                            label = { Text(item.label) }
-                        )
-                    }
-                }
-            }
-        ) { innerPadding ->
-            CardShufflerNavHost(
-                navHostController = navHostController,
-                modifier = Modifier.padding(innerPadding) // Apply padding
-            )
-        }
+    LaunchedEffect(Unit) {
+      composeNavigator.handleNavigationCommands(navHostController)
     }
+
+    val navigationItems = listOf(
+      NavItem(CardShufflerScreen.Home, "Home", Icons.Filled.Home),
+      NavItem(CardShufflerScreen.CardList, "CardList", Icons.AutoMirrored.Filled.List),
+      NavItem(CardShufflerScreen.SettingsScreen, "Settings", Icons.Filled.Settings),
+    )
+
+    Scaffold(
+      bottomBar = {
+        NavigationBar {
+          val navBackStackEntry by navHostController.currentBackStackEntryAsState()
+          val currentDestination = navBackStackEntry?.destination
+
+          navigationItems.forEach { item ->
+            NavigationBarItem(
+              selected = currentDestination?.route == item.screen::class.qualifiedName,
+              onClick = {
+                navHostController.navigate(item.screen) {
+                  popUpTo(navHostController.graph.findStartDestination().id) {
+                    saveState = true
+                  }
+                  launchSingleTop = true
+                  restoreState = true
+                }
+              },
+              icon = { Icon(item.icon, contentDescription = item.label) },
+              label = { Text(item.label) },
+            )
+          }
+        }
+      },
+    ) { innerPadding ->
+      CardShufflerNavHost(
+        navHostController = navHostController,
+        modifier = Modifier.padding(innerPadding), // Apply padding
+      )
+    }
+  }
 }

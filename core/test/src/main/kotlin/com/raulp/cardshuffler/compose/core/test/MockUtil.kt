@@ -2,8 +2,8 @@
 
 package com.raulp.cardshuffler.compose.core.test
 
-import com.raulp.cardshuffler.compose.core.model.Topic
 import com.raulp.cardshuffler.compose.core.model.FlashcardInfo
+import com.raulp.cardshuffler.compose.core.model.Topic
 
 object MockUtil {
 

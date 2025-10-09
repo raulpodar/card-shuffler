@@ -1,7 +1,8 @@
+
+
 package com.raulp.cardshuffler.compose.core.designsystem.animation
 
 import androidx.compose.animation.core.CubicBezierEasing
-
 
 val FancyTransitionEasing = CubicBezierEasing(0.48f, 0.19f, 0.05f, 1.03f)
 

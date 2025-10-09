@@ -1,3 +1,5 @@
+
+
 package com.raulp.cardshuffler.compose.core.database.entitiy
 
 import androidx.room.Entity
