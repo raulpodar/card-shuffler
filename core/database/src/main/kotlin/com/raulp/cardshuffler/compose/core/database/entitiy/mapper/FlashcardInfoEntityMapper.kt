@@ -12,6 +12,9 @@ object FlashcardInfoEntityMapper : EntityMapper<FlashcardInfo, FlashcardInfoEnti
     question = domain.question,
     answer = domain.answer,
     subjectId = domain.subjectId,
+    answerHistory = domain.answerHistory,
+    totalAnswers = domain.totalAnswers,
+    correctAnswers = domain.correctAnswers,
   )
 
   override fun asDomain(entity: FlashcardInfoEntity): FlashcardInfo = FlashcardInfo(
@@ -19,6 +22,9 @@ object FlashcardInfoEntityMapper : EntityMapper<FlashcardInfo, FlashcardInfoEnti
     question = entity.question,
     answer = entity.answer,
     subjectId = entity.subjectId,
+    answerHistory = entity.answerHistory,
+    totalAnswers = entity.totalAnswers,
+    correctAnswers = entity.correctAnswers,
   )
 }
 

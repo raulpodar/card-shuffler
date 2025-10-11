@@ -24,4 +24,6 @@
   <string name="def">DEF</string>
   <string name="spd">SPD</string>
   <string name="exp">EXP</string>
+  <string name="show_question" translatable="false">show question</string>
+  <string name="show_answer" translatable="false">show answer</string>
 </resources>

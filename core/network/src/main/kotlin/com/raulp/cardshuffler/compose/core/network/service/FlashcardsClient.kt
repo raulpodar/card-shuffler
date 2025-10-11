@@ -7,6 +7,8 @@ import com.skydoves.sandwich.ApiResponse
 import jakarta.inject.Inject
 
 class FlashcardsClient @Inject constructor(private val flashcardsService: FlashcardsService) {
-  suspend fun fetchFlashcards(): ApiResponse<FlashcardsResponse> =
-    flashcardsService.fetchFlashcards()
+  suspend fun fetchFlashcards(): ApiResponse<FlashcardsResponse> {
+    val response = flashcardsService.fetchFlashcards()
+    return response
+  }
 }

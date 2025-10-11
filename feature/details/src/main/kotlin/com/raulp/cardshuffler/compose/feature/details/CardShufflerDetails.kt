@@ -1,9 +1,16 @@
+
 package com.raulp.cardshuffler.compose.feature.details
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +20,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -20,10 +28,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,315 +44,362 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.kmpalette.palette.graphics.Palette
-import com.raulp.cardshuffler.compose.core.data.repository.details.FakeFlashcardsRepository
-import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerCircularProgress
 import com.raulp.cardshuffler.compose.core.designsystem.component.CardShufflerText
 import com.raulp.cardshuffler.compose.core.designsystem.theme.CardShufflerTheme
-import com.raulp.cardshuffler.compose.core.designsystem.utils.getPokemonTypeColor
-import com.raulp.cardshuffler.compose.core.model.Topic
 import com.raulp.cardshuffler.compose.core.model.FlashcardInfo
 import com.raulp.cardshuffler.compose.core.navigation.currentComposeNavigator
-import com.raulp.cardshuffler.compose.core.preview.CardShufflerPreviewTheme
-import com.raulp.cardshuffler.compose.designsystem.R
-import com.skydoves.landscapist.palette.rememberPaletteState
+import kotlin.math.max
+import kotlin.math.roundToInt
 
 @Composable
 fun SharedTransitionScope.CardShufflerDetails(
   animatedVisibilityScope: AnimatedVisibilityScope,
   detailsViewModel: DetailsViewModel = hiltViewModel(),
 ) {
-  val uiState by detailsViewModel.uiState.collectAsStateWithLifecycle()
-  val pokemon by detailsViewModel.topic.collectAsStateWithLifecycle()
-  val pokemonInfo by detailsViewModel.flashcardInfo.collectAsStateWithLifecycle()
+    val uiState by detailsViewModel.uiState.collectAsStateWithLifecycle()
+    val cardInfo by detailsViewModel.flashcardInfo.collectAsStateWithLifecycle()
+    val sessionCorrectAnswers by detailsViewModel.sessionCorrectAnswers.collectAsStateWithLifecycle()
+    val sessionTotalAnswers by detailsViewModel.sessionTotalAnswers.collectAsStateWithLifecycle()
+    val sessionAnswers by detailsViewModel.sessionAnswers.collectAsStateWithLifecycle()
+    var isFlipped by remember { mutableStateOf(false) }
 
-  Column(
-    modifier = Modifier
-      .fillMaxSize()
-      .verticalScroll(rememberScrollState())
-      .testTag("CardShufflerDetails"),
-  ) {
-
-    var palette by rememberPaletteState()
-    val backgroundBrush by palette.paletteBackgroundBrush()
-
-    DetailsHeader(
-      animatedVisibilityScope = animatedVisibilityScope,
-      topic = pokemon,
-      flashcardInfo = pokemonInfo,
-      onPaletteLoaded = { palette = it },
-      backgroundBrush = backgroundBrush
-    )
-
-    if (uiState == DetailsUiState.Idle && pokemonInfo != null) {
-      DetailsInfo(flashcardInfo = pokemonInfo!!)
-
-      DetailsStatus(flashcardInfo = pokemonInfo!!)
-    } else {
-      Box(modifier = Modifier.fillMaxSize()) {
-        CardShufflerCircularProgress()
-      }
+    val onKnow: () -> Unit = {
+        detailsViewModel.onKnowClick()
+        isFlipped = false
     }
-  }
-}
 
-@Composable
-private fun SharedTransitionScope.DetailsHeader(
-  animatedVisibilityScope: AnimatedVisibilityScope,
-  topic: Topic?,
-  flashcardInfo: FlashcardInfo?,
-  onPaletteLoaded: (Palette) -> Unit,
-  backgroundBrush: Brush,
-) {
-  val composeNavigator = currentComposeNavigator
-  val shape = RoundedCornerShape(
-    topStart = 0.dp,
-    topEnd = 0.dp,
-    bottomStart = 64.dp,
-    bottomEnd = 64.dp,
-  )
+    val onDoNotKnow: () -> Unit = {
+        detailsViewModel.onDoNotKnowClick()
+        isFlipped = false
+    }
 
-  Box(
-    modifier = Modifier
-      .fillMaxWidth()
-      .fillMaxHeight()
-      .shadow(elevation = 9.dp, shape = shape)
-      .background(brush = backgroundBrush, shape = shape),
-  ) {
-    Row(
-      modifier = Modifier
-        .padding(12.dp)
-        .statusBarsPadding(),
-      verticalAlignment = Alignment.CenterVertically,
-    ) {
-      Icon(
+    Column(
         modifier = Modifier
-          .padding(end = 6.dp)
-          .clickable { composeNavigator.navigateUp() },
-        painter = painterResource(id = R.drawable.ic_arrow),
-        tint = CardShufflerTheme.colors.absoluteWhite,
-        contentDescription = null,
-      )
-
-      Text(
-        modifier = Modifier.padding(horizontal = 10.dp),
-        text = topic?.topicTitle.orEmpty(),
-        color = CardShufflerTheme.colors.absoluteWhite,
-        fontWeight = FontWeight.Bold,
-        fontSize = 18.sp,
-      )
-    }
-
-    CardShufflerText(
-      modifier = Modifier
-        .align(Alignment.TopEnd)
-        .padding(12.dp)
-        .statusBarsPadding(),
-      text = flashcardInfo?.getIdString().orEmpty(),
-      previewText = "#001",
-      color = CardShufflerTheme.colors.absoluteWhite,
-      fontWeight = FontWeight.Bold,
-      fontSize = 18.sp,
-    )
-
-
-    // Center the FlashcardProficiencyIndicator
-    Box(
-      modifier = Modifier
-        .fillMaxWidth()
-        .padding(top = 20.dp), // Adjust padding as needed for vertical positioning
-      contentAlignment = Alignment.Center
+            .fillMaxSize()
+            .testTag("CardShufflerDetails"),
     ) {
-      FlashcardProficiencyIndicator(proficiency = 35)
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
+        ) {
+            DetailsHeader(
+                backgroundBrush = Brush.verticalGradient(
+                    colors = listOf(
+                        Color.Transparent,
+                        Color.Transparent
+                    )
+                ),
+                flashcardInfo = cardInfo,
+                sessionCorrectAnswers = sessionCorrectAnswers,
+                sessionTotalAnswers = sessionTotalAnswers,
+                sessionAnswers = sessionAnswers
+            )
+            if (uiState == DetailsUiState.Idle && cardInfo != null) {
+                DetailsInfo(
+                    flashcardInfo = cardInfo!!,
+                    isFlipped = isFlipped,
+                    onKnowClick = onKnow,
+                    onDoNotKnowClick = onDoNotKnow
+                )
+            } else {
+                Box(modifier = Modifier.fillMaxSize()) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+            }
+        }
+        val buttonColors = when {
+            isFlipped -> ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50))
+            else -> ButtonDefaults.buttonColors(containerColor = Color(0xFFF44336))
+        }
+        Button(
+            onClick = { isFlipped = !isFlipped },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            colors = buttonColors
+        ) {
+            Text(text = if (isFlipped) "show_question" else "show_answer")
+        }
+        if (isFlipped) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Button(
+                    onClick = onKnow,
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)),
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(text = "I knew this")
+                }
+                Spacer(modifier = Modifier.size(16.dp))
+                Button(
+                    onClick = onDoNotKnow,
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF44336)),
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(text = "I didn't know this")
+                }
+            }
+        }
     }
-  }
 }
 
 @Composable
-private fun DetailsInfo(flashcardInfo: FlashcardInfo) {
-  Row(
-    modifier = Modifier
-      .fillMaxWidth()
-      .padding(top = 14.dp),
-    horizontalArrangement = Arrangement.spacedBy(22.dp, Alignment.CenterHorizontally),
-  ) {
-//    flashcardInfo.forEach { typeInfo ->
-//      Text(
-//        modifier = Modifier
-//          .background(
-//            color = getPokemonTypeColor(type = typeInfo.type.name),
-//            shape = RoundedCornerShape(64.dp),
-//          )
-//          .padding(horizontal = 40.dp, vertical = 4.dp),
-//        text = typeInfo.type.name,
-//        fontWeight = FontWeight.Bold,
-//        textAlign = TextAlign.Center,
-//        color = CardShufflerTheme.colors.absoluteWhite,
-//        maxLines = 1,
-//        fontSize = 16.sp,
-//      )
-//    }
-  }
-
-  Row(
-    modifier = Modifier
-      .fillMaxWidth()
-      .padding(top = 24.dp),
-    horizontalArrangement = Arrangement.SpaceEvenly,
-  ) {
-    PokemonInfoItem(
-      title = flashcardInfo.answer,
-      content = stringResource(id = R.string.weight),
+private fun DetailsHeader(
+    backgroundBrush: Brush,
+    flashcardInfo: FlashcardInfo?,
+    sessionCorrectAnswers: Int,
+    sessionTotalAnswers: Int,
+    sessionAnswers: List<Boolean>
+) {
+    val composeNavigator = currentComposeNavigator
+    val shape = RoundedCornerShape(
+        topStart = 0.dp,
+        topEnd = 0.dp,
+        bottomStart = 64.dp,
+        bottomEnd = 64.dp,
     )
 
-    PokemonInfoItem(
-      title = flashcardInfo.question,
-      content = stringResource(id = R.string.height),
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .shadow(elevation = 9.dp, shape = shape)
+            .background(brush = backgroundBrush, shape = shape),
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(12.dp)
+                .statusBarsPadding(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                modifier = Modifier
+                    .padding(end = 6.dp)
+                    .clickable { composeNavigator.navigateUp() },
+                painter = painterResource(id = android.R.drawable.ic_media_previous),
+                tint = CardShufflerTheme.colors.black,
+                contentDescription = null,
+            )
+        }
+        if (flashcardInfo != null) {
+            Column(
+                modifier = Modifier.align(Alignment.Center),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                val proficiency =
+                    if (flashcardInfo.totalAnswers > 0) (flashcardInfo.correctAnswers.toFloat() / max(
+                        flashcardInfo.totalAnswers,
+                        10
+                    ).toFloat() * 100).toInt() else 0
+                FlashcardProficiencyIndicator(proficiency = proficiency)
+                Spacer(modifier = Modifier.height(16.dp))
+                StreakIndicator(answerHistory = flashcardInfo.answerHistory)
+                Spacer(modifier = Modifier.height(16.dp))
+                SessionPerformanceIndicator(
+                    correctAnswers = sessionCorrectAnswers,
+                    totalAnswers = sessionTotalAnswers
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                SessionStreakIndicator(sessionAnswers = sessionAnswers)
+            }
+        }
+    }
+}
+
+@Composable
+private fun DetailsInfo(
+    flashcardInfo: FlashcardInfo,
+    isFlipped: Boolean,
+    onKnowClick: () -> Unit,
+    onDoNotKnowClick: () -> Unit
+) {
+    var offsetX by remember { mutableStateOf(0f) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 14.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        AnimatedContent(
+            targetState = isFlipped,
+            transitionSpec = {
+                fadeIn(animationSpec = tween(durationMillis = 300)) togetherWith
+                        fadeOut(animationSpec = tween(durationMillis = 300))
+            }, label = ""
+        ) { targetState ->
+            Box(
+                modifier = Modifier.pointerInput(Unit) {
+                    if (targetState) {
+                        detectHorizontalDragGestures(
+                            onDragEnd = {
+                                if (offsetX > 0) {
+                                    onKnowClick()
+                                } else if (offsetX < 0) {
+                                    onDoNotKnowClick()
+                                }
+                                offsetX = 0f
+                            }
+                        ) { change, dragAmount ->
+                            change.consume()
+                            offsetX += dragAmount
+                        }
+                    }
+                }
+            ) {
+                if (targetState) {
+                    CardDetailItem(
+                        title = flashcardInfo.answer,
+                        modifier = Modifier.offset { IntOffset(offsetX.roundToInt(), 0) }
+                    )
+                } else {
+                    CardDetailItem(
+                        title = flashcardInfo.question
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun CardDetailItem(title: String, modifier: Modifier = Modifier) {
+    CardShufflerText(
+        text = title,
+        color = CardShufflerTheme.colors.black,
+        fontWeight = FontWeight.Bold,
+        textAlign = TextAlign.Center,
+        fontSize = 24.sp,
+        modifier = modifier.padding(horizontal = 16.dp)
     )
-  }
 }
 
 @Composable
 fun FlashcardProficiencyIndicator(proficiency: Int) {
-  val color = when {
-    proficiency >= 80 -> Color(0xFF4CAF50)  // Green
-    proficiency in 50..79 -> Color(0xFFFFC107) // Yellow
-    else -> Color(0xFFF44336) // Red
-  }
-
-  Column(horizontalAlignment = Alignment.CenterHorizontally) {
-    Box(
-      modifier = Modifier
-        .size(100.dp)
-        .clip(CircleShape)
-        .background(color),
-      contentAlignment = Alignment.Center
-    ) {
-      Text("$proficiency%", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+    val color = when {
+        proficiency >= 80 -> Color(0xFF4CAF50)
+        proficiency in 50..79 -> Color(0xFFFFC107)
+        else -> Color(0xFFF44336)
     }
 
-    Spacer(modifier = Modifier.height(8.dp))
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .clip(CircleShape)
+                .background(color),
+            contentAlignment = Alignment.Center
+        ) {
+            Text("$proficiency%", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+        }
 
-    CardShufflerText(
-      text = when {
-        proficiency >= 80 -> "Mastered"
-        proficiency in 50..79 -> "Review Needed"
-        else -> "Needs Practice"
-      },
-      color = CardShufflerTheme.colors.black,
-      fontWeight = FontWeight.Bold,
-      textAlign = TextAlign.Center,
-      fontSize = 24.sp,
-    )
-  }
+        Spacer(modifier = Modifier.height(8.dp))
+
+        CardShufflerText(
+            text = when {
+                proficiency >= 80 -> "Mastered"
+                proficiency in 50..79 -> "Review Needed"
+                else -> "Needs Practice"
+            },
+            color = CardShufflerTheme.colors.black,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            fontSize = 24.sp,
+        )
+    }
+}
+
+@Composable
+fun StreakIndicator(answerHistory: List<Boolean>) {
+    Row(horizontalArrangement = Arrangement.Center) {
+        for (i in 0 until 10) {
+            val color = when {
+                i < answerHistory.size && answerHistory[i] -> Color(0xFF4CAF50)
+                i < answerHistory.size && !answerHistory[i] -> Color.Red
+                else -> Color.Gray
+            }
+            Box(
+                modifier = Modifier
+                    .size(24.dp)
+                    .padding(2.dp)
+                    .background(color, shape = CircleShape)
+            )
+        }
+    }
+}
+
+@Composable
+fun SessionStreakIndicator(sessionAnswers: List<Boolean>) {
+    Row(horizontalArrangement = Arrangement.Center) {
+        for (i in 0 until 20) {
+            val color = when {
+                i < sessionAnswers.size && sessionAnswers[i] -> Color(0xFF4CAF50)
+                i < sessionAnswers.size && !sessionAnswers[i] -> Color.Red
+                else -> Color.Gray
+            }
+            Box(
+                modifier = Modifier
+                    .size(16.dp)
+                    .padding(2.dp)
+                    .background(color, shape = RoundedCornerShape(2.dp))
+            )
+        }
+    }
+}
+
+@Composable
+fun SessionPerformanceIndicator(correctAnswers: Int, totalAnswers: Int) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        CardShufflerText(
+            text = "Session Performance",
+            color = CardShufflerTheme.colors.black,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            fontSize = 20.sp,
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        CardShufflerText(
+            text = "$correctAnswers / $totalAnswers",
+            color = CardShufflerTheme.colors.black,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            fontSize = 24.sp,
+        )
+    }
 }
 
 @Preview
 @Composable
 fun FlashcardProficiencyIndicatorPreviewMastered() {
-  CardShufflerTheme {
-    FlashcardProficiencyIndicator(proficiency = 90)
-  }
+    CardShufflerTheme {
+        FlashcardProficiencyIndicator(proficiency = 90)
+    }
 }
 
 @Preview
 @Composable
 fun FlashcardProficiencyIndicatorPreviewReview() {
-  CardShufflerTheme {
-    FlashcardProficiencyIndicator(proficiency = 65)
-  }
+    CardShufflerTheme {
+        FlashcardProficiencyIndicator(proficiency = 65)
+    }
 }
-
-
-
-
-@Composable
-private fun DetailsStatus(
-  flashcardInfo: FlashcardInfo,
-) {
-  Text(
-    modifier = Modifier
-      .fillMaxWidth()
-      .padding(top = 22.dp, bottom = 16.dp),
-    text = stringResource(id = R.string.base_stats),
-    textAlign = TextAlign.Center,
-    color = CardShufflerTheme.colors.black,
-    fontWeight = FontWeight.Bold,
-    fontSize = 21.sp,
-  )
-
-//  Column {
-//    flashcardInfo.toCardShufflerStatusList().forEach { pokemonStatus ->
-//      PokemonStatusItem(
-//        modifier = Modifier.padding(bottom = 12.dp),
-//        CardShufflerStatus = pokemonStatus,
-//      )
-//    }
-//  }
-//  Flashcard(
-//    question = "What is the capital of France?",
-//    answer = "Paris",
-//    onKnewThis = {
-//      // Handle "I knew this" action, e.g., move to next card, update score
-//      println("User knew the answer!")
-//    },
-//    onNeedToPractice = {
-//      // Handle "I need to practice" action, e.g., mark for review
-//      println("User needs to practice this one.")
-//    }
-//  )
-//  FlashcardStatus(
-//    question = "What is the capital of France?",
-//    answer = "Paris",
-//    onAnswerSelected = { }
-//  )
-
-}
-
-
-//
-//@Preview
-//@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-//@Composable
-//private fun CardShufflerDetailsPreview() {
-//  CardShufflerPreviewTheme {
-//    CardShufflerDetails(
-//      animatedVisibilityScope = it,
-//      detailsViewModel = DetailsViewModel(
-//        flashcardsRepository = FakeFlashcardsRepository(),
-//        savedStateHandle = SavedStateHandle(),
-//      ),
-//    )
-//  }
-//}
-//
-//@Preview
-//@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-//@Composable
-//private fun CardShufflerDetailsInfoPreview() {
-//  CardShufflerPreviewTheme {
-//    DetailsInfo(flashcardInfo = PreviewUtils.mockPokemonInfo())
-//  }
-//}
-//
-//@Preview
-//@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-//@Composable
-//private fun CardShufflerDetailsStatusPreview() {
-//  CardShufflerPreviewTheme {
-//    DetailsStatus(
-//      flashcardInfo = PreviewUtils.mockPokemonInfo(),
-//    )
-//  }
-//}

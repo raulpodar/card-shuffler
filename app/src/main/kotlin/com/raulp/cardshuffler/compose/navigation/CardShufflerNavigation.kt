@@ -32,10 +32,10 @@ fun NavGraphBuilder.cardShufflerNavigation() {
   }
 }
 
-@Composable
-fun CardListScreen() {
-  Text(text = "Card List Screen")
-}
+// @Composable
+// fun CardListScreen() {
+//  Text(text = "Card List Screen")
+// }
 
 @Composable
 fun SettingsScreen() {

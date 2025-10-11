@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 10,
-    "identityHash": "8d21a13b3e16162d9634270635293289",
+    "version": 11,
+    "identityHash": "3e6aa9a2022db494ee4f808b81baecb3",
     "entities": [
       {
         "tableName": "TopicEntity",
@@ -36,7 +36,7 @@
       },
       {
         "tableName": "FlashcardInfoEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `subjectId` TEXT NOT NULL, `question` TEXT NOT NULL, `answer` TEXT NOT NULL, `streak` INTEGER NOT NULL, `totalAnswers` INTEGER NOT NULL, `correctAnswers` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `subjectId` TEXT NOT NULL, `question` TEXT NOT NULL, `answer` TEXT NOT NULL, `answerHistory` TEXT NOT NULL, `totalAnswers` INTEGER NOT NULL, `correctAnswers` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -63,9 +63,9 @@
             "notNull": true
           },
           {
-            "fieldPath": "streak",
-            "columnName": "streak",
-            "affinity": "INTEGER",
+            "fieldPath": "answerHistory",
+            "columnName": "answerHistory",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -91,7 +91,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8d21a13b3e16162d9634270635293289')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3e6aa9a2022db494ee4f808b81baecb3')"
     ]
   }
 }

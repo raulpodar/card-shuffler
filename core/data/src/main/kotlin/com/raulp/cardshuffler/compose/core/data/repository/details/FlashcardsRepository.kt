@@ -7,11 +7,12 @@ import com.raulp.cardshuffler.compose.core.model.FlashcardInfo
 import kotlinx.coroutines.flow.Flow
 
 interface FlashcardsRepository {
+  @WorkerThread
+  fun fetchFlashcardsBySubject(subjectId: String): Flow<List<FlashcardInfo>>
 
   @WorkerThread
-  fun fetchPokemonInfo(
-    name: String,
-    onComplete: () -> Unit,
-    onError: (String?) -> Unit,
-  ): Flow<FlashcardInfo>
+  suspend fun getAllFlashcards(): Flow<List<FlashcardInfo>>
+
+  @WorkerThread
+  suspend fun updateFlashcard(flashcardInfo: FlashcardInfo)
 }

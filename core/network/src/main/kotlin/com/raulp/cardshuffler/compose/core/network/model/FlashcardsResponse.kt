@@ -10,8 +10,8 @@ data class FlashcardsResponse(val flashcards: List<FlashcardResponse>)
 @Serializable
 data class FlashcardResponse(
   // Correct usage: Pass the expected JSON key as a string
-  @SerialName("subject_id") val subjectId: String,
-  @SerialName("id") val id: String,
+  @SerialName("subjectId") val subjectId: String,
+  @SerialName("id") val id: Int,
   @SerialName("question") val question: String,
   @SerialName("answer") val answer: String,
 )
