@@ -99,6 +99,9 @@ dependencies {
   implementation(projects.core.model)
   implementation(projects.core.designsystem)
   implementation(projects.core.navigation)
+  androidTestImplementation(projects.core.data)
+  androidTestImplementation(projects.core.database)
+  androidTestImplementation(libs.androidx.room.runtime)
 
   // compose
   implementation(libs.androidx.activity.compose)

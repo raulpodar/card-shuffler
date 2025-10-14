@@ -19,4 +19,7 @@ interface TopicsDao {
 
   @Query("SELECT * FROM TopicEntity")
   suspend fun getAllTopicsList(): List<TopicEntity>
+
+  @Query("DELETE FROM TopicEntity")
+  suspend fun clearTopics()
 }

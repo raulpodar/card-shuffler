@@ -26,4 +26,7 @@ interface FlashcardInfoDao {
 
   @Update
   suspend fun updateFlashcard(flashcardInfoEntity: FlashcardInfoEntity)
+
+  @Query("DELETE FROM FlashcardInfoEntity")
+  suspend fun clearFlashcards()
 }
