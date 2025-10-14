@@ -50,10 +50,8 @@ class MockWebServerTestRule : CardShufflerBaseTestRule() {
     }
 
     private fun enqueueMockResponses(responses: Array<LocalMockResponse>) {
-        // The dispatcher serves responses based on the request path.
         mockWebServer.dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
-                // Find the first mock response whose file name is contained in the request path.
                 val response = responses.firstOrNull {
                     val mockResponseFileName = it.filePath.substringAfter("mock-responses/").removeSuffix(".json")
                     request.path?.contains(mockResponseFileName, ignoreCase = true) ?: false
