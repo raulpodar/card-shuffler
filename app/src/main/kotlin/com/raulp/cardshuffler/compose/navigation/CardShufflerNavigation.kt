@@ -24,7 +24,7 @@ fun NavGraphBuilder.cardShufflerNavigation() {
   }
 
   composable<CardShufflerScreen.CardList> {
-    CardListScreen()
+//    CardListScreen()
   }
 
   composable<CardShufflerScreen.SettingsScreen> {
