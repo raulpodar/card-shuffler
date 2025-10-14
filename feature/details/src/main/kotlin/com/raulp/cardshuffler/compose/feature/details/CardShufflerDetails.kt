@@ -274,7 +274,8 @@ private fun DetailsInfo(
                     )
                 } else {
                     CardDetailItem(
-                        title = flashcardInfo.question
+                        title = flashcardInfo.question,
+                        modifier = Modifier.testTag("Question")
                     )
                 }
             }

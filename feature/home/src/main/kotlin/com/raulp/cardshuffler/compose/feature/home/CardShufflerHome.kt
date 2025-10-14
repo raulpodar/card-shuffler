@@ -72,7 +72,7 @@ fun SharedTransitionScope.CardShufflerHome(
       animatedVisibilityScope = animatedVisibilityScope,
       uiState = uiState,
       topicList = topicsList.toImmutableList(),
-      fetchNextPokemonList = homeViewModel::fetchNextPokemonList,
+      fetchNextTopicList = homeViewModel::fetchNextTopicList,
     )
   }
 }
@@ -82,7 +82,7 @@ private fun SharedTransitionScope.HomeContent(
   animatedVisibilityScope: AnimatedVisibilityScope,
   uiState: HomeUiState,
   topicList: ImmutableList<Topic>,
-  fetchNextPokemonList: () -> Unit,
+  fetchNextTopicList: () -> Unit,
 ) {
   Box(modifier = Modifier.fillMaxSize()) {
     val threadHold = 8
@@ -91,17 +91,17 @@ private fun SharedTransitionScope.HomeContent(
       columns = GridCells.Fixed(2),
       contentPadding = PaddingValues(6.dp),
     ) {
-      itemsIndexed(items = topicList, key = { _, pokemon -> pokemon.topicTitle }) { index, pokemon ->
+      itemsIndexed(items = topicList, key = { _, topic -> topic.topicTitle }) { index, topic ->
         if ((index + threadHold) >= topicList.size && uiState != HomeUiState.Loading) {
-          fetchNextPokemonList()
+          fetchNextTopicList()
         }
 
         var palette by rememberPaletteState()
         val backgroundColor by palette.paletteBackgroundColor()
 
-        PokemonCard(
+        SubjectCard(
           animatedVisibilityScope = animatedVisibilityScope,
-          topic = pokemon,
+          topic = topic,
           onPaletteLoaded = { palette = it },
           backgroundColor = backgroundColor,
         )
@@ -115,7 +115,7 @@ private fun SharedTransitionScope.HomeContent(
 }
 
 @Composable
-private fun SharedTransitionScope.PokemonCard(
+private fun SharedTransitionScope.SubjectCard(
   animatedVisibilityScope: AnimatedVisibilityScope,
   onPaletteLoaded: (Palette) -> Unit,
   backgroundColor: Color,
@@ -125,12 +125,12 @@ private fun SharedTransitionScope.PokemonCard(
 
   Card(
     modifier = Modifier
-      .padding(6.dp)
-      .fillMaxWidth()
-      .testTag("Pokemon")
-      .clickable {
-        composeNavigator.navigate(CardShufflerScreen.Details(topic = topic))
-      },
+        .padding(6.dp)
+        .fillMaxWidth()
+        .testTag("Subject")
+        .clickable {
+            composeNavigator.navigate(CardShufflerScreen.Details(topic = topic))
+        },
     shape = RoundedCornerShape(14.dp),
     colors = CardColors(
       containerColor = backgroundColor,
@@ -142,15 +142,15 @@ private fun SharedTransitionScope.PokemonCard(
   ) {
     GlideImage(
       modifier = Modifier
-        .align(Alignment.CenterHorizontally)
-        .padding(top = 20.dp)
-        .size(120.dp)
-        .cardShufflerSharedElement(
-          isLocalInspectionMode = LocalInspectionMode.current,
-          state = rememberSharedContentState(key = "image-${topic.topicTitle}"),
-          animatedVisibilityScope = animatedVisibilityScope,
-          boundsTransform = boundsTransform,
-        ),
+          .align(Alignment.CenterHorizontally)
+          .padding(top = 20.dp)
+          .size(120.dp)
+          .cardShufflerSharedElement(
+              isLocalInspectionMode = LocalInspectionMode.current,
+              state = rememberSharedContentState(key = "image-${topic.topicTitle}"),
+              animatedVisibilityScope = animatedVisibilityScope,
+              boundsTransform = boundsTransform,
+          ),
       imageModel = { topic.imageUrl },
       imageOptions = ImageOptions(contentScale = ContentScale.Inside),
       component = rememberImageComponent {
@@ -170,15 +170,15 @@ private fun SharedTransitionScope.PokemonCard(
 
     Text(
       modifier = Modifier
-        .align(Alignment.CenterHorizontally)
-        .fillMaxWidth()
-        .cardShufflerSharedElement(
-          isLocalInspectionMode = LocalInspectionMode.current,
-          state = rememberSharedContentState(key = "name-${topic.topicTitle}"),
-          animatedVisibilityScope = animatedVisibilityScope,
-          boundsTransform = boundsTransform,
-        )
-        .padding(12.dp),
+          .align(Alignment.CenterHorizontally)
+          .fillMaxWidth()
+          .cardShufflerSharedElement(
+              isLocalInspectionMode = LocalInspectionMode.current,
+              state = rememberSharedContentState(key = "name-${topic.topicTitle}"),
+              animatedVisibilityScope = animatedVisibilityScope,
+              boundsTransform = boundsTransform,
+          )
+          .padding(12.dp),
       text = topic.topicTitle,
       color = CardShufflerTheme.colors.black,
       textAlign = TextAlign.Center,
@@ -187,31 +187,3 @@ private fun SharedTransitionScope.PokemonCard(
     )
   }
 }
-
-//@Preview
-//@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-//@Composable
-//private fun CardShufflerHomePreview() {
-//  CardShufflerTheme {
-//    SharedTransitionScope {
-//      AnimatedVisibility(visible = true, label = "") {
-//        CardShufflerHome(
-//          animatedVisibilityScope = this,
-//          homeViewModel = HomeViewModel(homeRepository = FakeHomeRepository()),
-//        )
-//      }
-//    }
-//  }
-//}
-//
-//@Preview
-//@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-//@Composable
-//private fun HomeContentPreview() {
-//  CardShufflerPreviewTheme { scope ->
-//    HomeContent(
-//      animatedVisibilityScope = scope,
-//      uiState = HomeUiState.Idle
-//    )
-//  }
-//}

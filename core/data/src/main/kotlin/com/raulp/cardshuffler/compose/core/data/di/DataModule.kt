@@ -13,11 +13,13 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal interface DataModule {
+abstract class DataModule {
 
   @Binds
-  fun bindsMainRepository(homeRepositoryImpl: HomeRepositoryImpl): HomeRepository
+  abstract fun bindsMainRepository(homeRepositoryImpl: HomeRepositoryImpl): HomeRepository
 
   @Binds
-  fun bindsDetailRepository(detailsRepositoryImpl: FlashcardsRepositoryImpl): FlashcardsRepository
+  abstract fun bindsDetailRepository(
+    detailsRepositoryImpl: FlashcardsRepositoryImpl,
+  ): FlashcardsRepository
 }

@@ -99,6 +99,9 @@ dependencies {
   implementation(projects.core.model)
   implementation(projects.core.designsystem)
   implementation(projects.core.navigation)
+  androidTestImplementation(projects.core.data)
+  androidTestImplementation(projects.core.database)
+  androidTestImplementation(libs.androidx.room.runtime)
 
   // compose
   implementation(libs.androidx.activity.compose)
@@ -126,5 +129,7 @@ dependencies {
   androidTestImplementation(libs.truth)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso)
-//  androidTestImplementation(libs.android.test.runner)
+  androidTestImplementation(libs.android.test.runner)
+  androidTestImplementation(libs.okhttp.mockwebserver)
+  androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 }

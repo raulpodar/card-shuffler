@@ -21,8 +21,8 @@ class HomeViewModel @Inject constructor(
 
   internal val uiState: ViewModelStateFlow<HomeUiState> = viewModelStateFlow(HomeUiState.Loading)
 
-  private val pokemonFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
-  val topicList: StateFlow<List<Topic>> = pokemonFetchingIndex.flatMapLatest { page ->
+  private val flashcardsPokemonFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
+  val topicList: StateFlow<List<Topic>> = flashcardsPokemonFetchingIndex.flatMapLatest { page ->
     homeRepository.fetchTopicList(
       page = page,
       onStart = { uiState.tryEmit(key, HomeUiState.Loading) },
@@ -35,9 +35,9 @@ class HomeViewModel @Inject constructor(
     initialValue = emptyList(),
   )
 
-  fun fetchNextPokemonList() {
+  fun fetchNextTopicList() {
     if (uiState.value != HomeUiState.Loading) {
-      pokemonFetchingIndex.value++
+      flashcardsPokemonFetchingIndex.value++
     }
   }
 }
