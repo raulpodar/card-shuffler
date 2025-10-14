@@ -1,0 +1,13 @@
+{
+  "subjects": [
+    {
+      "id": "data-structures",
+      "title": "Data Structures",
+      "image": "https://placehold.co/600x400/7E57C2/FFFFFF.png?text=Data+Structures"
+    },
+    {
+      "id": "algorithms",
+      "title": "Algorithms",
+      "image": "https://placehold.co/600x400/5C6BC0/FFFFFF.png?text=Algorithms"
+    }]
+}
